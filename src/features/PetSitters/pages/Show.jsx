@@ -15,7 +15,7 @@ import {
   fetchPetSitterReviews,
   createReview,
   deleteReview,
-} from "../../../actions/reviews.action";
+} from "../api/reviewApi";
 import LoadingSpinner from "../../../shared/utils/loadingSpinner";
 import { Formik } from "formik";
 import * as yup from "yup";
