@@ -9,8 +9,8 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import { connect } from "react-redux";
 import defaultImage from "../../assets/Images/defaultServiceRequest.jpg";
-import ErrorAlert from "../utils/errorAlert";
-import LoadingSpinner from "../utils/loadingSpinner";
+import ErrorAlert from "../../shared/utils/errorAlert";
+import LoadingSpinner from "../../shared/utils/loadingSpinner";
 
 const schema = yup.object().shape({
   petType: yup.string().required().min(3),

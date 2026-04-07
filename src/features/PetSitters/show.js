@@ -16,12 +16,12 @@ import {
   createReview,
   deleteReview,
 } from "../../actions/reviews.action";
-import LoadingSpinner from "../utils/loadingSpinner";
+import LoadingSpinner from "../../shared/utils/loadingSpinner";
 import { Formik } from "formik";
 import * as yup from "yup";
-import { StarRating, StarRatingResult } from "components/utils/starRating";
+import { StarRating, StarRatingResult } from "shared/utils/starRating";
 import "../../assets/css/stars.css";
-import ErrorAlert from "../utils/errorAlert";
+import ErrorAlert from "../../shared/utils/errorAlert";
 import defaultPetSitterImage from "../../assets/Images/defaultPetSitter.jpg";
 import DisplayData from "../../assets/Display/petSitters";
 

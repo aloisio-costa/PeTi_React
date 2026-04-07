@@ -1,14 +1,14 @@
 import React from "react";
 import Home from "./components/Home";
 
-import PetSitters from "./components/PetSitters/index";
-import PetSitterProfile from "./components/PetSitters/show";
-import PetSitterProfileEdit from "./components/PetSitters/edit";
-import PetSitterProfileNew from "./components/PetSitters/new";
+import PetSitters from "./features/PetSitters/index";
+import PetSitterProfile from "./features/PetSitters/show";
+import PetSitterProfileEdit from "./features/PetSitters/edit";
+import PetSitterProfileNew from "./features/PetSitters/new";
 
-import ServiceRequests from "./components/ServiceRequests/index";
-import ServiceRequestsNew from "./components/ServiceRequests/new";
-import ServiceRequestsEdit from "./components/ServiceRequests/edit";
+import ServiceRequests from "./features/ServiceRequests/index";
+import ServiceRequestsNew from "./features/ServiceRequests/new";
+import ServiceRequestsEdit from "./features/ServiceRequests/edit";
 
 import AboutUs from "./components/aboutUs";
 import Register from "./components/Users/register";

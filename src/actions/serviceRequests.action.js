@@ -1,4 +1,4 @@
-import { handleRequests } from "../components/utils/errorHandlers";
+import { handleRequests } from "../shared/utils/errorHandlers";
 
 export function createServiceRequest(serviceRequest) {
   const apiUrl = `${process.env.REACT_APP_PETI_CORE_API_URL}/serviceRequests`;
@@ -47,7 +47,7 @@ export function updateServiceRequest(serviceRequest, id) {
 }
 
 export function deleteServiceRequest(id) {
-  debugger;
+
   const apiUrl = `${process.env.REACT_APP_PETI_CORE_API_URL}/serviceRequests/${id}`;
   const requestOptions = {
     method: "DELETE",

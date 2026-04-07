@@ -8,8 +8,8 @@ import {
 } from "../../actions/serviceRequests.action";
 import { Formik } from "formik";
 import * as yup from "yup";
-import LoadingSpinner from "../utils/loadingSpinner";
-import ErrorAlert from "../utils/errorAlert";
+import LoadingSpinner from "../../shared/utils/loadingSpinner";
+import ErrorAlert from "../../shared/utils/errorAlert";
 import defaultServiceRequestImage from "../../assets/Images/defaultServiceRequest.jpg";
 import DisplayData from "../../assets/Display/serviceRequests";
 

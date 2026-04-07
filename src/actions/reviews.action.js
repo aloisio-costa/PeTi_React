@@ -1,4 +1,4 @@
-import { handleRequests } from "../components/utils/errorHandlers";
+import { handleRequests } from "../shared/utils/errorHandlers";
 
 export function createReview(reviewBody) {
   const apiUrl = `${process.env.REACT_APP_PETI_CORE_API_URL}/reviews`;
