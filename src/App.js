@@ -11,13 +11,13 @@ import ServiceRequestsNew from "./features/ServiceRequests/new";
 import ServiceRequestsEdit from "./features/ServiceRequests/edit";
 
 import AboutUs from "./components/aboutUs";
-import Register from "./components/Users/register";
-import Login from "./components/Users/login";
+import Register from "./features/Users/register";
+import Login from "./features/Users/login";
 
 import NotFound from "components/notFound";
 
-import NavBar from "./components/Partials/NavBar";
-import Footer from "./components/Partials/footer";
+import NavBar from "./shared/components/NavBar";
+import Footer from "./shared/components/footer";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
