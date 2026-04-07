@@ -1,14 +1,14 @@
-import { React, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Card, Row, Col, Button } from "react-bootstrap";
 import { useHistory } from "react-router";
-import { fetchAllPetSitters } from "../../actions/petSitters.action";
+import { fetchAllPetSitters } from "./api/petSittersApi";
 import LoadingSpinner from "../../shared/utils/loadingSpinner";
 import ErrorAlert from "../../shared/utils/errorAlert";
-import { StarRatingResult } from "shared/utils/starRating";
+import { StarRatingResult } from "../../shared/utils/starRating";
 import "../../assets/css/stars.css";
 import "../../assets/css/indexCard.css";
 import defaultPetSitterImage from "../../assets/Images/defaultPetSitter.jpg";
-import DisplayData from "../../assets/Display/petSitters";
+import DisplayData from "./data/petSitters.json";
 
 const PetSitters = () => {
   const history = useHistory();
@@ -28,21 +28,26 @@ const PetSitters = () => {
   const isDisplayMode = process.env.REACT_APP_DISPLAY_MODE === "true";
 
   const fetchPetSitters = async () => {
-    if (isDisplayMode) {
-      setPetSitters(DisplayData.PetSitters);
-      setLoading(false);
-      setError(null);
-    } else {
-      const response = await fetchAllPetSitters().catch((e) => {
-        setError(e.error);
+    try {
+      if (isDisplayMode) {
+        setPetSitters(DisplayData);
+        setError(null);
         setLoading(false);
-      });
+        return;
+      }
+
+      const response = await fetchAllPetSitters();
 
       if (response.data && !response.error) {
-        setPetSitters([...response.data]);
-        setLoading(false);
+        setPetSitters(response.data);
         setError(null);
+      } else {
+        setError(response.error || "Failed to fetch pet sitters.");
       }
+    } catch (e) {
+      setError(e?.error || e?.message || "Failed to fetch pet sitters.");
+    } finally {
+      setLoading(false);
     }
   };
 

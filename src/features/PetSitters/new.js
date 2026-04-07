@@ -1,10 +1,10 @@
-import { React, useState } from "react";
+import React, { useState } from "react";
 import { Form, Button, Image, Col, Row, Badge } from "react-bootstrap";
 import { useHistory } from "react-router";
 import {
   createPetSitter,
   savePetSitterPhoto,
-} from "../../actions/petSitters.action";
+} from "./api/petSittersApi";
 import { connect } from "react-redux";
 import { Formik } from "formik";
 import * as yup from "yup";

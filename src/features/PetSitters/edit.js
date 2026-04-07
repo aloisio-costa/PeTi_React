@@ -1,17 +1,17 @@
-import { React, useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Button, Image, Col, Row, Badge } from "react-bootstrap";
 import { useHistory } from "react-router";
 import {
   fetchPetSitter,
   updatePetSitter,
   savePetSitterPhoto,
-} from "../../actions/petSitters.action";
+} from "./api/petSittersApi";
 import { Formik } from "formik";
 import * as yup from "yup";
 import LoadingSpinner from "../../shared/utils/loadingSpinner";
 import ErrorAlert from "../../shared/utils/errorAlert";
 import defaultPetSitterImage from "../../assets/Images/defaultPetSitter.jpg";
-import DisplayData from "../../assets/Display/petSitters";
+import DisplayData from "./data/petSitters.json";
 
 const schema = yup.object().shape({
   title: yup.string().required().max(75),

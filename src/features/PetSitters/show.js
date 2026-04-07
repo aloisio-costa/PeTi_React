@@ -10,7 +10,7 @@ import {
 } from "react-bootstrap";
 import { IoPersonCircleOutline } from "react-icons/io5";
 import { useHistory } from "react-router";
-import { fetchPetSitter } from "../../actions/petSitters.action";
+import { fetchPetSitter } from "./api/petSittersApi";
 import {
   fetchPetSitterReviews,
   createReview,
@@ -23,7 +23,7 @@ import { StarRating, StarRatingResult } from "shared/utils/starRating";
 import "../../assets/css/stars.css";
 import ErrorAlert from "../../shared/utils/errorAlert";
 import defaultPetSitterImage from "../../assets/Images/defaultPetSitter.jpg";
-import DisplayData from "../../assets/Display/petSitters";
+import DisplayData from "./data/petSitters.json";
 
 const schema = yup.object().shape({
   rating: yup.number().required("Don't forget to rate it").min(1).max(5),

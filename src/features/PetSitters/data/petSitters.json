@@ -1,5 +1,4 @@
-{
-  "PetSitters": [
+[
     {
       "title": "Best Pet Sitter in the world",
       "description": "Hello parents!\nIf u need someone to take care of your pets, even if it’s a last minute thing, I am the right person to help.\nI’ve always loved animals, since I was little so this is basically my dream job .\nI have experience with animals, I have myself a cat that loves new friends.\nI can provide dog/cat boarding, they can stay for a few days, I can walk them as much as they want and will provide all the love and care they need.\nIf u need help, give me a call!",
@@ -77,4 +76,3 @@
       "id": "2"
     }
   ]
-}
