@@ -1,5 +1,5 @@
 import React from "react";
-import Home from "./shared/components/Home";
+import Home from "./features/Home/Home";
 
 import PetSittersList from "./features/PetSitters/pages/List";
 import PetSitterShow from "./features/PetSitters/pages/Show";
@@ -10,11 +10,11 @@ import ServiceRequests from "./features/ServiceRequests/pages/List";
 import ServiceRequestsNew from "./features/ServiceRequests/pages/New";
 import ServiceRequestsEdit from "./features/ServiceRequests/pages/Edit";
 
-import AboutUs from "./shared/components/aboutUs";
+import AboutUs from "./features/AboutUs/AboutUs";
 import Register from "./features/Users/register";
 import Login from "./features/Users/login";
 
-import NotFound from "shared/components/notFound";
+import NotFound from "features/NotFound/NotFound";
 
 import NavBar from "./shared/components/NavBar";
 import Footer from "./shared/components/footer";
