@@ -64,10 +64,10 @@ const ServiceRequestsEdit = ({ match }) => {
 
   const getServiceRequest = async () => {
     if (process.env.REACT_APP_DISPLAY_MODE) {
-      console.log("service", DisplayData.ServiceRequests[id]);
+
       setServiceRequest(DisplayData.ServiceRequests[id]);
       setSelectedImage(defaultServiceRequestImage);
-      debugger;
+      
       setLoading(false);
       setError(null);
     } else {

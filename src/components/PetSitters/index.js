@@ -24,8 +24,8 @@ const PetSitters = () => {
 
     return Math.ceil(reviewsSum / petSitter.reviews.length);
   };
-  
-  const isDisplayMode = process.env.REACT_APP_DISPLAY_MODE === "true"
+
+  const isDisplayMode = process.env.REACT_APP_DISPLAY_MODE === "true";
 
   const fetchPetSitters = async () => {
     if (isDisplayMode) {
@@ -39,7 +39,7 @@ const PetSitters = () => {
       });
 
       if (response.data && !response.error) {
-        setPetSitters([...DisplayData.PetSitters, ...response.data]);
+        setPetSitters([...response.data]);
         setLoading(false);
         setError(null);
       }

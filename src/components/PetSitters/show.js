@@ -100,7 +100,7 @@ const PetSitterProfile = ({ match }) => {
 
   const fetchPettSitter = async () => {
     if (DisplayData.PetSitters[id]) {
-      debugger;
+      
       setPetSitter(DisplayData.PetSitters[id]);
       setLoading(false);
       setError(null);
@@ -126,7 +126,6 @@ const PetSitterProfile = ({ match }) => {
   }, []);
 
   const RenderPetSitterProfile = () => {
-    console.log("petSitter", petSitter);
     return (
       <div>
         <Card>
@@ -292,7 +291,7 @@ const PetSitterProfile = ({ match }) => {
       )}
       {!error && !loading && petSitter && reviews && (
         <Row className="no-gutters">
-          <Col md={5} md={6} className="mr-3">
+          <Col md={5} className="mr-3">
             {RenderPetSitterProfile()}
           </Col>
           <Col>

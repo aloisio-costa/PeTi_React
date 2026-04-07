@@ -1,10 +1,8 @@
 import { useState } from "react";
-import { Redirect, useHistory } from "react-router";
-import GoogleAuth from "../GoogleAuth";
+import { Redirect } from "react-router";
 import "../../assets/css/user.css";
 
 const Login = ({ setUserName }) => {
-  const history = useHistory();
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -23,17 +21,12 @@ const Login = ({ setUserName }) => {
       credentials: "include",
       body: JSON.stringify(user),
     });
-    //localStorage.setItem("user", "testing");
-    // .then((user) => {
-    //     localStorage.setItem("user", JSON.stringify(user));
 
-    //console.log(response.headers.get('set-cookie'));
     const username = response.json();
 
     setRedirect(true);
     setUserName(username.name);
 
-    //history.push("/")
   };
 
   if (redirect) {

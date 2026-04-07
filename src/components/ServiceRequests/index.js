@@ -16,10 +16,11 @@ const ServiceRequests = ({ currentUserId }) => {
   const [serviceRequests, setServiceRequests] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const isDisplayMode = process.env.REACT_APP_DISPLAY_MODE === "true";
 
   const fetchUserServiceRequests = async () => {
-    if (process.env.REACT_APP_DISPLAY_MODE) {
-      console.log("inside");
+    if (isDisplayMode) {
+      
       setServiceRequests(DisplayData.ServiceRequests);
       setLoading(false);
       setError(null);
@@ -30,8 +31,8 @@ const ServiceRequests = ({ currentUserId }) => {
       });
 
       if (response.data && !response.error) {
-        debugger;
-        setServiceRequests([...DisplayData.ServiceRequests, ...response.data]);
+        
+        setServiceRequests([...response.data]);
         setLoading(false);
         setError(null);
       }
@@ -97,7 +98,6 @@ const ServiceRequests = ({ currentUserId }) => {
                         <Card.Img
                           style={({ width: "10%" }, { height: "5rem" })}
                           className="rounded"
-                          className="rounded-circle"
                           variant="top"
                           src={
                             process.env.REACT_APP_DISPLAY_MODE
