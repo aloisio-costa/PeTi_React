@@ -1,10 +1,10 @@
 import React from "react";
 import Home from "./components/Home";
 
-import PetSitters from "./features/PetSitters/index";
-import PetSitterProfile from "./features/PetSitters/show";
-import PetSitterProfileEdit from "./features/PetSitters/edit";
-import PetSitterProfileNew from "./features/PetSitters/new";
+import PetSittersList from "./features/PetSitters/pages/List";
+import PetSitterShow from "./features/PetSitters/pages/Show";
+import PetSitterEdit from "./features/PetSitters/pages/Edit";
+import PetSitterNew from "./features/PetSitters/pages/New";
 
 import ServiceRequests from "./features/ServiceRequests/index";
 import ServiceRequestsNew from "./features/ServiceRequests/new";
@@ -33,12 +33,12 @@ const App = () => {
           <Route path="/" component={Home} exact />
           <Route path="/aboutUs" component={AboutUs} exact />
 
-          <Route path="/petSitters" component={PetSitters} exact />
-          <Route path="/petSitters/new" component={PetSitterProfileNew} exact />
-          <Route path="/petSitters/:id" component={PetSitterProfile} exact />
+          <Route path="/petSitters" component={PetSittersList} exact />
+          <Route path="/petSitters/new" component={PetSitterNew} exact />
+          <Route path="/petSitters/:id" component={PetSitterShow} exact />
           <Route
             path="/petSitters/:id/edit"
-            component={PetSitterProfileEdit}
+            component={PetSitterEdit}
             exact
           />
 

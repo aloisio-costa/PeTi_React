@@ -10,20 +10,20 @@ import {
 } from "react-bootstrap";
 import { IoPersonCircleOutline } from "react-icons/io5";
 import { useHistory } from "react-router";
-import { fetchPetSitter } from "./api/petSittersApi";
+import { fetchPetSitter } from "../api/petSittersApi";
 import {
   fetchPetSitterReviews,
   createReview,
   deleteReview,
-} from "../../actions/reviews.action";
-import LoadingSpinner from "../../shared/utils/loadingSpinner";
+} from "../../../actions/reviews.action";
+import LoadingSpinner from "../../../shared/utils/loadingSpinner";
 import { Formik } from "formik";
 import * as yup from "yup";
 import { StarRating, StarRatingResult } from "shared/utils/starRating";
-import "../../assets/css/stars.css";
-import ErrorAlert from "../../shared/utils/errorAlert";
-import defaultPetSitterImage from "../../assets/Images/defaultPetSitter.jpg";
-import DisplayData from "./data/petSitters.json";
+import "../../../assets/css/stars.css";
+import ErrorAlert from "../../../shared/utils/errorAlert";
+import defaultPetSitterImage from "../../../assets/Images/defaultPetSitter.jpg";
+import DisplayData from "../data/petSitters.json";
 
 const schema = yup.object().shape({
   rating: yup.number().required("Don't forget to rate it").min(1).max(5),

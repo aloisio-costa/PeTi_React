@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Card, Row, Col, Button } from "react-bootstrap";
 import { useHistory } from "react-router";
-import { fetchAllPetSitters } from "./api/petSittersApi";
-import LoadingSpinner from "../../shared/utils/loadingSpinner";
-import ErrorAlert from "../../shared/utils/errorAlert";
-import { StarRatingResult } from "../../shared/utils/starRating";
-import "../../assets/css/stars.css";
-import "../../assets/css/indexCard.css";
-import defaultPetSitterImage from "../../assets/Images/defaultPetSitter.jpg";
-import DisplayData from "./data/petSitters.json";
+import { fetchAllPetSitters } from "../api/petSittersApi";
+import LoadingSpinner from "../../../shared/utils/loadingSpinner";
+import ErrorAlert from "../../../shared/utils/errorAlert";
+import { StarRatingResult } from "../../../shared/utils/starRating";
+import "../../../assets/css/stars.css";
+import "../../../assets/css/indexCard.css";
+import defaultPetSitterImage from "../../../assets/Images/defaultPetSitter.jpg";
+import DisplayData from "../data/petSitters.json";
 
 const PetSitters = () => {
   const history = useHistory();

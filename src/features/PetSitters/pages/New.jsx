@@ -1,40 +1,39 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Form, Button, Image, Col, Row, Badge } from "react-bootstrap";
 import { useHistory } from "react-router";
 import {
-  fetchPetSitter,
-  updatePetSitter,
+  createPetSitter,
   savePetSitterPhoto,
-} from "./api/petSittersApi";
+} from "../api/petSittersApi";
+import { connect } from "react-redux";
 import { Formik } from "formik";
 import * as yup from "yup";
-import LoadingSpinner from "../../shared/utils/loadingSpinner";
-import ErrorAlert from "../../shared/utils/errorAlert";
-import defaultPetSitterImage from "../../assets/Images/defaultPetSitter.jpg";
-import DisplayData from "./data/petSitters.json";
+import defaultImage from "../../../assets/Images/defaultPetSitter.jpg";
+import ErrorAlert from "../../../shared/utils/errorAlert";
+import LoadingSpinner from "../../../shared/utils/loadingSpinner";
 
 const schema = yup.object().shape({
   title: yup.string().required().max(75),
-  description: yup.string().required().min(5),
+  description: yup.string().required(),
   location: yup.string().required(),
   price: yup.number().required().min(1),
 });
 
-const PetSitterEdit = ({ match }) => {
+const PetSitterNew = ({ currentUserId }) => {
+  const history = useHistory();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const [petSitter, setPetSitter] = useState({
     title: "",
     description: "",
     location: "",
     price: "",
     photoFileName: "defaultPetSitter.png",
+    userId: "unknow",
   });
   const [file, setFile] = useState();
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const history = useHistory();
-  const id = match.params.id;
 
-  const [selectedImage, setSelectedImage] = useState();
+  const [selectedImage, setSelectedImage] = useState(defaultImage);
 
   const onFieldChange = (event) => {
     const target = event.target;
@@ -60,48 +59,32 @@ const PetSitterEdit = ({ match }) => {
     }
   };
 
-  const getPetSitter = async () => {
-    if (process.env.REACT_APP_DISPLAY_MODE) {
-      setPetSitter(DisplayData.PetSitters[id]);
-      setSelectedImage(defaultPetSitterImage);
+  const newPetSitter = async () => {
+    const response = await createPetSitter({
+      ...petSitter,
+      userId: currentUserId,
+    });
+    const photoResponse = await savePetSitterPhoto(file);
+
+    if (response && !response.error && !photoResponse.error) {
       setLoading(false);
       setError(null);
     } else {
-      const response = await fetchPetSitter(id).catch((e) => {
-        setError(e.error);
-        setLoading(false);
-      });
-
-      if (response.data && !response.error) {
-        setPetSitter(response.data);
-        setSelectedImage(
-          process.env.REACT_APP_PETI_CORE_PHOTOS_URL +
-            response.data.photoFileName
-        );
-        setLoading(false);
-        setError(null);
-      }
+      setError(response.error ?? photoResponse.error);
+      setLoading(false);
     }
   };
 
-  useEffect(() => {
-    getPetSitter();
-  }, []);
-
-  const editPetSitter = async () => {
-    await updatePetSitter(petSitter, id);
-    await savePetSitterPhoto(file);
-  };
-
-  const onSubmitForm = () => {
-    editPetSitter();
-    history.push(`/petSitters/${petSitter.id}`);
+  const onSubmitForm = async () => {
+    setLoading(true);
+    await newPetSitter();
+    history.push(`/petSitters`);
   };
 
   return (
-    <div className="mt-3 col-md-6 offset-md-3">
+    <div className="col-md-6 offset-md-3">
       <h1 className="d-flex justify-content-center">
-        <Badge bg="success">Edit Pet Sitter</Badge>
+        <Badge bg="success">Become a Pet Sitter</Badge>
       </h1>
       {error && !loading && (
         <div>
@@ -113,7 +96,7 @@ const PetSitterEdit = ({ match }) => {
           <LoadingSpinner />
         </div>
       )}
-      {!error && !loading && petSitter && (
+      {!error && !loading && (
         <Formik
           validationSchema={schema}
           onSubmit={onSubmitForm}
@@ -127,6 +110,7 @@ const PetSitterEdit = ({ match }) => {
             touched,
             isValid,
             errors,
+            dirty,
           }) => (
             <Form noValidate onSubmit={handleSubmit}>
               <Row className="mb-3">
@@ -141,7 +125,7 @@ const PetSitterEdit = ({ match }) => {
                       onFieldChange(e);
                     }}
                     onBlur={handleBlur}
-                    isValid={!errors.title}
+                    isValid={touched.title && !errors.title}
                     isInvalid={touched.title && !!errors.title}
                   />
                   <Form.Control.Feedback tooltip>
@@ -166,7 +150,7 @@ const PetSitterEdit = ({ match }) => {
                       onFieldChange(e);
                     }}
                     onBlur={handleBlur}
-                    isValid={!errors.description}
+                    isValid={touched.description && !errors.description}
                     isInvalid={touched.description && !!errors.description}
                   />
                   <Form.Control.Feedback tooltip>
@@ -190,7 +174,7 @@ const PetSitterEdit = ({ match }) => {
                       onFieldChange(e);
                     }}
                     onBlur={handleBlur}
-                    isValid={!errors.price}
+                    isValid={touched.price && !errors.price}
                     isInvalid={touched.price && !!errors.price}
                   />
                   <Form.Control.Feedback tooltip>
@@ -214,7 +198,7 @@ const PetSitterEdit = ({ match }) => {
                       onFieldChange(e);
                     }}
                     onBlur={handleBlur}
-                    isValid={!errors.location}
+                    isValid={touched.location && !errors.location}
                     isInvalid={touched.location && !!errors.location}
                   />
                   <Form.Control.Feedback tooltip>
@@ -248,7 +232,7 @@ const PetSitterEdit = ({ match }) => {
               </Row>
               <Button
                 className="mt-2"
-                disabled={!isValid}
+                disabled={!(isValid && dirty)}
                 variant="primary"
                 type="submit"
               >
@@ -262,4 +246,8 @@ const PetSitterEdit = ({ match }) => {
   );
 };
 
-export default PetSitterEdit;
+const mapStateToProps = (state) => {
+  return { currentUserId: state.auth.userId };
+};
+
+export default connect(mapStateToProps)(PetSitterNew);
