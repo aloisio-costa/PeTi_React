@@ -1,16 +1,17 @@
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 import { Form, Button, Image, Col, Row, Badge } from "react-bootstrap";
 import { useHistory } from "react-router";
 import {
-  createServiceRequest,
+  fetchServiceRequest,
+  updateServiceRequest,
   saveServiceRequestPhoto,
-} from "../../actions/serviceRequests.action";
+} from "../api/serviceRequestsApi";
 import { Formik } from "formik";
 import * as yup from "yup";
-import { connect } from "react-redux";
-import defaultImage from "../../assets/Images/defaultServiceRequest.jpg";
-import ErrorAlert from "../../shared/utils/errorAlert";
-import LoadingSpinner from "../../shared/utils/loadingSpinner";
+import LoadingSpinner from "../../../shared/utils/loadingSpinner";
+import ErrorAlert from "../../../shared/utils/errorAlert";
+import defaultServiceRequestImage from "../../../assets/Images/defaultServiceRequest.jpg";
+import DisplayData from "../../../assets/Display/serviceRequests";
 
 const schema = yup.object().shape({
   petType: yup.string().required().min(3),
@@ -20,22 +21,22 @@ const schema = yup.object().shape({
   note: yup.string(),
 });
 
-const ServiceRequestsNew = ({ currentUserId }) => {
+const ServiceRequestsEdit = ({ match }) => {
   const history = useHistory();
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
   const [serviceRequest, setServiceRequest] = useState({
     petType: "",
     breed: "",
     service: "",
     location: "",
     note: "",
-    photoFileName: "defaultServiceRequest.jpg",
-    userId: "unknown",
+    photoFileName: "",
   });
   const [file, setFile] = useState();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const id = match.params.id;
 
-  const [selectedImage, setSelectedImage] = useState(defaultImage);
+  const [selectedImage, setSelectedImage] = useState();
 
   const onFieldChange = (event) => {
     const target = event.target;
@@ -61,32 +62,50 @@ const ServiceRequestsNew = ({ currentUserId }) => {
     }
   };
 
-  const newServiceRequest = async () => {
-    const response = await createServiceRequest({
-      ...serviceRequest,
-      userId: currentUserId,
-    });
-    const photoResponse = await saveServiceRequestPhoto(file);
+  const getServiceRequest = async () => {
+    if (process.env.REACT_APP_DISPLAY_MODE) {
 
-    if (response && !response.error && !photoResponse.error) {
+      setServiceRequest(DisplayData.ServiceRequests[id]);
+      setSelectedImage(defaultServiceRequestImage);
+      
       setLoading(false);
       setError(null);
     } else {
-      setError(response.error ?? photoResponse.error);
-      setLoading(false);
+      const response = await fetchServiceRequest(id).catch((e) => {
+        setError(e.error);
+        setLoading(false);
+      });
+
+      if (response.data && !response.error) {
+        setServiceRequest(response.data);
+        setSelectedImage(
+          process.env.REACT_APP_PETI_CORE_PHOTOS_URL +
+            response.data.photoFileName
+        );
+        setLoading(false);
+        setError(null);
+      }
     }
   };
 
-  const onSubmitForm = async () => {
-    setLoading(true);
-    await newServiceRequest();
-    history.push("/serviceRequests");
+  const editServiceRequest = async () => {
+    await updateServiceRequest(serviceRequest, id);
+    await saveServiceRequestPhoto(file);
   };
+
+  const onSubmitForm = () => {
+    editServiceRequest();
+    history.push(`/serviceRequests`);
+  };
+
+  useEffect(() => {
+    getServiceRequest();
+  }, []);
 
   return (
     <div className="mt-3 col-md-6 offset-md-3">
       <h1 className="d-flex justify-content-center">
-        <Badge bg="success">New Service Request</Badge>
+        <Badge bg="success">Edit Service Request</Badge>
       </h1>
       {error && !loading && (
         <div>
@@ -98,7 +117,7 @@ const ServiceRequestsNew = ({ currentUserId }) => {
           <LoadingSpinner />
         </div>
       )}
-      {!error && !loading && (
+      {!error && !loading && serviceRequest && (
         <Formik
           validationSchema={schema}
           onSubmit={onSubmitForm}
@@ -112,7 +131,6 @@ const ServiceRequestsNew = ({ currentUserId }) => {
             touched,
             isValid,
             errors,
-            dirty,
           }) => (
             <Form noValidate onSubmit={handleSubmit}>
               <Row className="mb-3">
@@ -127,7 +145,7 @@ const ServiceRequestsNew = ({ currentUserId }) => {
                       onFieldChange(e);
                     }}
                     onBlur={handleBlur}
-                    isValid={touched.petType && !errors.petType}
+                    isValid={!errors.petType}
                     isInvalid={touched.petType && !!errors.petType}
                   />
                   <Form.Control.Feedback tooltip>
@@ -151,7 +169,7 @@ const ServiceRequestsNew = ({ currentUserId }) => {
                       onFieldChange(e);
                     }}
                     onBlur={handleBlur}
-                    isValid={touched.breed && !errors.breed}
+                    isValid={!errors.breed}
                     isInvalid={touched.breed && !!errors.breed}
                   />
                   <Form.Control.Feedback tooltip>
@@ -175,10 +193,9 @@ const ServiceRequestsNew = ({ currentUserId }) => {
                       onFieldChange(e);
                     }}
                     onBlur={handleBlur}
-                    isValid={touched.service && !errors.service}
+                    isValid={!errors.service}
                     isInvalid={touched.service && !!errors.service}
                   >
-                    <option value="">Select a Service...</option>
                     <option value="House Sitting">House Sitting</option>
                     <option value="Dog Walk">Dog Walk</option>
                     <option value="Pet Day Care">Pet Day Care</option>
@@ -205,7 +222,7 @@ const ServiceRequestsNew = ({ currentUserId }) => {
                       onFieldChange(e);
                     }}
                     onBlur={handleBlur}
-                    isValid={touched.location && !errors.location}
+                    isValid={!errors.location}
                     isInvalid={touched.location && !!errors.location}
                   />
                   <Form.Control.Feedback tooltip>
@@ -217,22 +234,19 @@ const ServiceRequestsNew = ({ currentUserId }) => {
                 </Form.Group>
               </Row>
 
-              <Row className="mb-3">
-                <Form.Group as={Col} md="12">
-                  <Form.Label>Note</Form.Label>
-                  <Form.Control
-                    as="textarea"
-                    style={{ height: "100px" }}
-                    name="note"
-                    value={values.note}
-                    onChange={(e) => {
-                      handleChange(e);
-                      onFieldChange(e);
-                    }}
-                    onBlur={handleBlur}
-                  />
-                </Form.Group>
-              </Row>
+              <Form.Group as={Col} md="12">
+                <Form.Label>Note</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  style={{ height: "100px" }}
+                  name="note"
+                  value={values.note}
+                  onChange={(e) => {
+                    handleChange(e);
+                    onFieldChange(e);
+                  }}
+                />
+              </Form.Group>
 
               <div className="mb-3">
                 <Image
@@ -252,11 +266,7 @@ const ServiceRequestsNew = ({ currentUserId }) => {
                   }}
                 />
               </div>
-              <Button
-                disabled={!(isValid && dirty)}
-                variant="primary"
-                type="submit"
-              >
+              <Button disabled={!isValid} variant="primary" type="submit">
                 Submit
               </Button>
             </Form>
@@ -267,8 +277,4 @@ const ServiceRequestsNew = ({ currentUserId }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return { currentUserId: state.auth.userId };
-};
-
-export default connect(mapStateToProps)(ServiceRequestsNew);
+export default ServiceRequestsEdit;

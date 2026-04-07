@@ -1,20 +1,20 @@
 import React from "react";
-import Home from "./components/Home";
+import Home from "./shared/components/Home";
 
 import PetSittersList from "./features/PetSitters/pages/List";
 import PetSitterShow from "./features/PetSitters/pages/Show";
 import PetSitterEdit from "./features/PetSitters/pages/Edit";
 import PetSitterNew from "./features/PetSitters/pages/New";
 
-import ServiceRequests from "./features/ServiceRequests/index";
-import ServiceRequestsNew from "./features/ServiceRequests/new";
-import ServiceRequestsEdit from "./features/ServiceRequests/edit";
+import ServiceRequests from "./features/ServiceRequests/pages/List";
+import ServiceRequestsNew from "./features/ServiceRequests/pages/New";
+import ServiceRequestsEdit from "./features/ServiceRequests/pages/Edit";
 
-import AboutUs from "./components/aboutUs";
+import AboutUs from "./shared/components/aboutUs";
 import Register from "./features/Users/register";
 import Login from "./features/Users/login";
 
-import NotFound from "components/notFound";
+import NotFound from "shared/components/notFound";
 
 import NavBar from "./shared/components/NavBar";
 import Footer from "./shared/components/footer";

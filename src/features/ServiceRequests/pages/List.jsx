@@ -1,16 +1,16 @@
 import { React, useState, useEffect } from "react";
-import "../../assets/css/dropdownDots.css";
-import LoadingSpinner from "../../shared/utils/loadingSpinner";
-import "../../assets/css/indexCard.css";
-import ErrorAlert from "../../shared/utils/errorAlert";
+import "../../../assets/css/dropdownDots.css";
+import LoadingSpinner from "../../../shared/utils/loadingSpinner";
+import "../../../assets/css/indexCard.css";
+import ErrorAlert from "../../../shared/utils/errorAlert";
 import { Card, Row, Col, Button, Dropdown } from "react-bootstrap";
 import {
   fetchServiceRequests,
   deleteServiceRequest,
-} from "../../actions/serviceRequests.action";
+} from "../api/serviceRequestsApi";
 import { connect } from "react-redux";
-import DisplayData from "../../assets/Display/serviceRequests";
-import defaultServiceRequestImage from "../../assets/Images/defaultServiceRequest.jpg";
+import DisplayData from "../../../assets/Display/serviceRequests";
+import defaultServiceRequestImage from "../../../assets/Images/defaultServiceRequest.jpg";
 
 const ServiceRequests = ({ currentUserId }) => {
   const [serviceRequests, setServiceRequests] = useState([]);
