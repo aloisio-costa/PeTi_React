@@ -10,12 +10,11 @@ import "../../../assets/css/indexCard.css";
 import defaultPetSitterImage from "../../../assets/Images/defaultPetSitter.jpg";
 import DisplayData from "../data/petSitters.json";
 import { isDisplayMode } from "../../../shared/config/env";
+import { usePetSitters } from "../hooks/usePetSitters";
 
 const PetSitters = () => {
   const history = useHistory();
-  const [petSitters, setPetSitters] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const { petSitters, loading, error } = usePetSitters();
 
   const reviewAverage = (petSitter) => {
     let reviewsSum = 0;
@@ -25,33 +24,6 @@ const PetSitters = () => {
 
     return Math.ceil(reviewsSum / petSitter.reviews.length);
   };
-
-const fetchPetSitters = async () => {
-  setLoading(true);
-
-  if (isDisplayMode) {
-    setPetSitters(DisplayData.PetSitters);
-    setError(null);
-    setLoading(false);
-    return;
-  }
-
-  const response = await fetchAllPetSitters();
-
-  if (response.error) {
-    setError(response.error);
-    setPetSitters([]);
-  } else {
-    setPetSitters(response.data);
-    setError(null);
-  }
-
-  setLoading(false);
-};
-
-  useEffect(() => {
-    fetchPetSitters();
-  }, []);
 
   return (
     <div>
