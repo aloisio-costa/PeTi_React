@@ -60,19 +60,19 @@ const PetSitterNew = ({ currentUserId }) => {
   };
 
   const newPetSitter = async () => {
-    const response = await createPetSitter({
+    const createResponse = await createPetSitter({
       ...petSitter,
       userId: currentUserId,
     });
     const photoResponse = await savePetSitterPhoto(file);
 
-    if (response && !response.error && !photoResponse.error) {
-      setLoading(false);
-      setError(null);
+    if(createResponse.error || photoResponse.error){
+      setError(response.error ??  photoResponse.error);
     } else {
-      setError(response.error ?? photoResponse.error);
-      setLoading(false);
+      setError(null);
     }
+
+    setLoading(false);
   };
 
   const onSubmitForm = async () => {

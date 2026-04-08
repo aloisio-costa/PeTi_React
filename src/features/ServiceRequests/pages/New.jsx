@@ -62,19 +62,22 @@ const ServiceRequestsNew = ({ currentUserId }) => {
   };
 
   const newServiceRequest = async () => {
+    setLoading(true);
     const response = await createServiceRequest({
       ...serviceRequest,
       userId: currentUserId,
     });
+
     const photoResponse = await saveServiceRequestPhoto(file);
 
-    if (response && !response.error && !photoResponse.error) {
-      setLoading(false);
-      setError(null);
+    if (response.error) {
+      setError(response.error);
+
     } else {
-      setError(response.error ?? photoResponse.error);
-      setLoading(false);
+      setError(null);
     }
+    
+    setLoading(false);
   };
 
   const onSubmitForm = async () => {

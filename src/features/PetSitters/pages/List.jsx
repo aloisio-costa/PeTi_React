@@ -9,6 +9,7 @@ import "../../../assets/css/stars.css";
 import "../../../assets/css/indexCard.css";
 import defaultPetSitterImage from "../../../assets/Images/defaultPetSitter.jpg";
 import DisplayData from "../data/petSitters.json";
+import { isDisplayMode } from "../../../shared/config/env";
 
 const PetSitters = () => {
   const history = useHistory();
@@ -25,31 +26,28 @@ const PetSitters = () => {
     return Math.ceil(reviewsSum / petSitter.reviews.length);
   };
 
-  const isDisplayMode = process.env.REACT_APP_DISPLAY_MODE === "true";
+const fetchPetSitters = async () => {
+  setLoading(true);
 
-  const fetchPetSitters = async () => {
-    try {
-      if (isDisplayMode) {
-        setPetSitters(DisplayData);
-        setError(null);
-        setLoading(false);
-        return;
-      }
+  if (isDisplayMode) {
+    setPetSitters(DisplayData.PetSitters);
+    setError(null);
+    setLoading(false);
+    return;
+  }
 
-      const response = await fetchAllPetSitters();
+  const response = await fetchAllPetSitters();
 
-      if (response.data && !response.error) {
-        setPetSitters(response.data);
-        setError(null);
-      } else {
-        setError(response.error || "Failed to fetch pet sitters.");
-      }
-    } catch (e) {
-      setError(e?.error || e?.message || "Failed to fetch pet sitters.");
-    } finally {
-      setLoading(false);
-    }
-  };
+  if (response.error) {
+    setError(response.error);
+    setPetSitters([]);
+  } else {
+    setPetSitters(response.data);
+    setError(null);
+  }
+
+  setLoading(false);
+};
 
   useEffect(() => {
     fetchPetSitters();

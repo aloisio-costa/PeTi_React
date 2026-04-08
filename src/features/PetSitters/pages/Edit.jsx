@@ -67,20 +67,19 @@ const PetSitterEdit = ({ match }) => {
       setLoading(false);
       setError(null);
     } else {
-      const response = await fetchPetSitter(id).catch((e) => {
-        setError(e.error);
-        setLoading(false);
-      });
+      setLoading(true);
+      const response = await fetchPetSitter(id)
 
-      if (response.data && !response.error) {
+      if (response.error) {
+        setError(response.error);
+      } else {
         setPetSitter(response.data);
         setSelectedImage(
-          process.env.REACT_APP_PETI_CORE_PHOTOS_URL +
-            response.data.photoFileName
+          process.env.REACT_APP_PETI_CORE_PHOTOS_URL + response.data.photoFileName
         );
-        setLoading(false);
         setError(null);
       }
+      setLoading(false);
     }
   };
 

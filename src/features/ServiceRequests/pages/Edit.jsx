@@ -64,27 +64,29 @@ const ServiceRequestsEdit = ({ match }) => {
 
   const getServiceRequest = async () => {
     if (process.env.REACT_APP_DISPLAY_MODE) {
-
       setServiceRequest(DisplayData.ServiceRequests[id]);
       setSelectedImage(defaultServiceRequestImage);
       
       setLoading(false);
       setError(null);
-    } else {
-      const response = await fetchServiceRequest(id).catch((e) => {
-        setError(e.error);
-        setLoading(false);
-      });
 
-      if (response.data && !response.error) {
+    } else {
+      setLoading(true);
+      const response = await fetchServiceRequest(id);
+
+      if (response.error) {
+        setError(response.error);
+        setServiceRequest([]);
+        
+      } else {
         setServiceRequest(response.data);
         setSelectedImage(
-          process.env.REACT_APP_PETI_CORE_PHOTOS_URL +
-            response.data.photoFileName
+          process.env.REACT_APP_PETI_CORE_PHOTOS_URL + response.data.photoFileName
         );
-        setLoading(false);
+        
         setError(null);
       }
+      setLoading(false);
     }
   };
 

@@ -11,31 +11,33 @@ import {
 import { connect } from "react-redux";
 import DisplayData from "../../../assets/Display/serviceRequests";
 import defaultServiceRequestImage from "../../../assets/Images/defaultServiceRequest.jpg";
+import { isDisplayMode } from "../../../shared/config/env";
 
 const ServiceRequests = ({ currentUserId }) => {
   const [serviceRequests, setServiceRequests] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const isDisplayMode = process.env.REACT_APP_DISPLAY_MODE === "true";
 
   const fetchUserServiceRequests = async () => {
     if (isDisplayMode) {
-      
       setServiceRequests(DisplayData.ServiceRequests);
       setLoading(false);
       setError(null);
-    } else {
-      const response = await fetchServiceRequests(currentUserId).catch((e) => {
-        setError(e.error);
-        setLoading(false);
-      });
 
-      if (response.data && !response.error) {
-        
+    } else {
+      setLoading(true);
+      const response = await fetchServiceRequests(currentUserId);
+      
+      if (response.error) {
+        setError(response.error);
+        setServiceRequests([]);
+
+      } else {
         setServiceRequests([...response.data]);
-        setLoading(false);
         setError(null);
       }
+
+      setLoading(false);
     }
   };
 

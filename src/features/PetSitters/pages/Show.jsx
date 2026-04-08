@@ -99,24 +99,24 @@ const PetSitterProfile = ({ match }) => {
   };
 
   const fetchPettSitter = async () => {
+    setLoading(true);
     if (DisplayData.PetSitters[id]) {
       
       setPetSitter(DisplayData.PetSitters[id]);
       setLoading(false);
       setError(null);
     } else {
-      const response = await fetchPetSitter(id).catch((e) => {
-        setError(e.error);
-        setLoading(false);
-      });
+      const response = await fetchPetSitter(id)
 
-      if (response) {
-        if (response.data && !response.error) {
-          setPetSitter(response.data);
-          setLoading(false);
-          setError(null);
-        }
+      if (response.error) {
+        setError(response.error);
+        setPetSitter([]);
+      } else {
+        setPetSitter(response.data);
+        setError(null);
       }
+
+      setLoading(false);
     }
   };
 
