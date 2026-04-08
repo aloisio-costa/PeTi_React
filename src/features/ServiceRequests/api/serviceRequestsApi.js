@@ -1,67 +1,51 @@
-import { handleRequests } from "../../../shared/api/handleRequests";
+import { API_BASE_URL } from "../../../shared/api/apiConfig";
+import { handleRequests } from "../../../shared/api/apiClient";
+
+const jsonHeaders = {
+  "Content-Type": "application/json",
+  Accept: "application/json",
+};
 
 export function createServiceRequest(serviceRequest) {
-  const apiUrl = `${process.env.REACT_APP_PETI_CORE_API_URL}/serviceRequests`;
-  const requestOptions = {
+  return handleRequests(`${API_BASE_URL}/serviceRequests`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: jsonHeaders,
     body: JSON.stringify(serviceRequest),
-  };
-
-  return handleRequests(apiUrl, requestOptions);
+  });
 }
 
 export function fetchServiceRequests(userId) {
-  const apiUrl = `${process.env.REACT_APP_PETI_CORE_API_URL}/serviceRequests?userId=${userId}`;
-  const requestOptions = {
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
-  };
-
-  return handleRequests(apiUrl, requestOptions);
+  return handleRequests(
+    `${API_BASE_URL}/serviceRequests?userId=${userId}`,
+    {
+      headers: jsonHeaders,
+    }
+  );
 }
 
 export function fetchServiceRequest(id) {
-  const apiUrl = `${process.env.REACT_APP_PETI_CORE_API_URL}/serviceRequests/${id}`;
-  const requestOptions = {
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
-  };
-
-  return handleRequests(apiUrl, requestOptions);
+  return handleRequests(`${API_BASE_URL}/serviceRequests/${id}`, {
+    headers: jsonHeaders,
+  });
 }
 
 export function updateServiceRequest(serviceRequest, id) {
-  const apiUrl = `${process.env.REACT_APP_PETI_CORE_API_URL}/serviceRequests/${id}`;
-  const requestOptions = {
+  return handleRequests(`${API_BASE_URL}/serviceRequests/${id}`, {
     method: "PUT",
-    headers: { "Content-Type": "application/json" },
+    headers: jsonHeaders,
     body: JSON.stringify(serviceRequest),
-  };
-
-  return handleRequests(apiUrl, requestOptions);
+  });
 }
 
 export function deleteServiceRequest(id) {
-
-  const apiUrl = `${process.env.REACT_APP_PETI_CORE_API_URL}/serviceRequests/${id}`;
-  const requestOptions = {
+  return handleRequests(`${API_BASE_URL}/serviceRequests/${id}`, {
     method: "DELETE",
-  };
-
-  return handleRequests(apiUrl, requestOptions);
+  });
 }
 
 export function saveServiceRequestPhoto(formData) {
-  const apiUrl = `${process.env.REACT_APP_PETI_CORE_API_URL}/serviceRequests/SaveFile`;
-  const requestOptions = {
+  return handleRequests(`${API_BASE_URL}/serviceRequests/SaveFile`, {
     method: "POST",
     body: formData,
-  };
-
-  return handleRequests(apiUrl, requestOptions);
+  });
 }

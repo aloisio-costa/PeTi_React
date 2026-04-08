@@ -1,57 +1,42 @@
-import { handleRequests } from "../../../shared/api/handleRequests";
+import { API_BASE_URL } from "../../../shared/api/apiConfig";
+import { handleRequests } from "../../../shared/api/apiClient";
+
+const jsonHeaders = {
+  "Content-Type": "application/json",
+  Accept: "application/json",
+};
 
 export function fetchAllPetSitters() {
-  const apiUrl = `${process.env.REACT_APP_PETI_CORE_API_URL}/petSitters`;
-  const requestOptions = {
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
-  };
-
-  return handleRequests(apiUrl, requestOptions);
+  return handleRequests(`${API_BASE_URL}/petSitters`, {
+    headers: jsonHeaders,
+  });
 }
 
 export function fetchPetSitter(id) {
-  const apiUrl = `${process.env.REACT_APP_PETI_CORE_API_URL}/petSitters/${id}`;
-  const requestOptions = {
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
-  };
-
-  return handleRequests(apiUrl, requestOptions);
+  return handleRequests(`${API_BASE_URL}/petSitters/${id}`, {
+    headers: jsonHeaders,
+  });
 }
 
 export function createPetSitter(petSitter) {
-  const apiUrl = `${process.env.REACT_APP_PETI_CORE_API_URL}/petSitters`;
-  const requestOptions = {
+  return handleRequests(`${API_BASE_URL}/petSitters`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: jsonHeaders,
     body: JSON.stringify(petSitter),
-  };
-
-  return handleRequests(apiUrl, requestOptions);
+  });
 }
 
 export function updatePetSitter(petSitter, id) {
-  const apiUrl = `${process.env.REACT_APP_PETI_CORE_API_URL}/petSitters/${id}`;
-  const requestOptions = {
+  return handleRequests(`${API_BASE_URL}/petSitters/${id}`, {
     method: "PUT",
-    headers: { "Content-Type": "application/json" },
+    headers: jsonHeaders,
     body: JSON.stringify(petSitter),
-  };
-
-  return handleRequests(apiUrl, requestOptions);
+  });
 }
 
 export function savePetSitterPhoto(formData) {
-  const apiUrl = `${process.env.REACT_APP_PETI_CORE_API_URL}/petSitters/SaveFile`;
-  const requestOptions = {
+  return handleRequests(`${API_BASE_URL}/petSitters/SaveFile`, {
     method: "POST",
     body: formData,
-  };
-
-  return handleRequests(apiUrl, requestOptions);
+  });
 }

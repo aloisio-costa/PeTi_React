@@ -1,4 +1,4 @@
-import { handleRequests } from "../../../shared/api/handleRequests";
+import { handleRequests } from "../../../shared/api/apiClient";
 
 export function createReview(reviewBody) {
   const apiUrl = `${process.env.REACT_APP_PETI_CORE_API_URL}/reviews`;
