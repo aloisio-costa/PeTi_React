@@ -9,7 +9,7 @@ import {
   Form,
 } from "react-bootstrap";
 import { IoPersonCircleOutline } from "react-icons/io5";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router-dom";
 import {
   fetchPetSitterReviews,
   createReview,
@@ -33,7 +33,7 @@ const schema = yup.object().shape({
 });
 
 const PetSitterProfile = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const { id } = useParams();
   const { petSitter, loading, error } = usePetSitter(id);
   const [review, setReview] = useState({
@@ -126,7 +126,7 @@ const PetSitterProfile = () => {
           <Card.Body>
             {/* {displayAdmin && ( */}
             <Button
-              onClick={() => history.push(`/petSitters/${petSitter.id}/edit`)}
+              onClick={() => navigate(`/petSitters/${petSitter.id}/edit`)}
               variant="info"
             >
               Edit

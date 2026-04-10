@@ -15,7 +15,7 @@
     "react-hook-form": "^7.9.0",
     "react-icons": "^4.2.0",
     "react-redux": "^7.2.5",
-    "react-router-dom": "^5.2.0",
+    "react-router-dom": "^6.30.3",
     "react-scripts": "^5.0.1",
     "redux": "^4.1.1",
     "universal-cookie": "^8.1.0",
@@ -45,5 +45,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/react-router-dom": "^5.3.3"
   }
 }

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Redirect } from "react-router";
+import { Navigate } from "react-router-dom";
 import "../../assets/css/user.css";
 
 const Register = () => {
@@ -21,7 +21,7 @@ const Register = () => {
     setRedirect(true);
 
     if (redirect) {
-      return <Redirect to="/login" />;
+      return <Navigate to="/login" />;
     }
   };
 

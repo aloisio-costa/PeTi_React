@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Badge } from "react-bootstrap";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router-dom";
 import {
   createPetSitter,
   savePetSitterPhoto,
@@ -21,7 +21,7 @@ const schema = yup.object().shape({
 });
 
 const PetSitterNew = ({ currentUserId }) => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [petSitter, setPetSitter] = useState({
@@ -79,7 +79,7 @@ const PetSitterNew = ({ currentUserId }) => {
   const onSubmitForm = async () => {
     setLoading(true);
     await newPetSitter();
-    history.push(`/petSitters`);
+    navigate(`/petSitters`);
   };
 
   return (

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Card, Row, Col, Button } from "react-bootstrap";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { fetchAllPetSitters } from "../api/petSittersApi";
 import LoadingSpinner from "../../../shared/utils/loadingSpinner";
 import ErrorAlert from "../../../shared/utils/errorAlert";
@@ -13,7 +13,7 @@ import { isDisplayMode } from "../../../shared/config/env";
 import { usePetSitters } from "../hooks/usePetSitters";
 
 const PetSitters = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const { petSitters, loading, error } = usePetSitters();
 
   const reviewAverage = (petSitter) => {
@@ -91,7 +91,7 @@ const PetSitters = () => {
                       <Card.Body>
                         <Button
                           onClick={() =>
-                            history.push(`/petSitters/${petSitter.id}`)
+                            navigate(`/petSitters/${petSitter.id}`)
                           }
                           variant="info"
                         >

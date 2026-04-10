@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Badge } from "react-bootstrap";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router-dom";
 import {
   fetchPetSitter,
   updatePetSitter,
@@ -32,7 +32,7 @@ const PetSitterEdit = ({ match }) => {
   const [file, setFile] = useState();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const history = useHistory();
+  const navigate = useNavigate();
   const id = match.params.id;
 
   const [selectedImage, setSelectedImage] = useState();
@@ -95,7 +95,7 @@ const PetSitterEdit = ({ match }) => {
 
   const onSubmitForm = () => {
     editPetSitter();
-    history.push(`/petSitters/${petSitter.id}`);
+    navigate(`/petSitters/${petSitter.id}`);
   };
 
   return (

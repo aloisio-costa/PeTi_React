@@ -1,6 +1,6 @@
 import { React, useEffect, useState } from "react";
 import { Badge } from "react-bootstrap";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router-dom";
 import {
   fetchServiceRequest,
   updateServiceRequest,
@@ -23,7 +23,7 @@ const schema = yup.object().shape({
 });
 
 const ServiceRequestsEdit = ({ match }) => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const [serviceRequest, setServiceRequest] = useState({
     petType: "",
     breed: "",
@@ -98,7 +98,7 @@ const ServiceRequestsEdit = ({ match }) => {
 
   const onSubmitForm = () => {
     editServiceRequest();
-    history.push(`/serviceRequests`);
+    navigate(`/serviceRequests`);
   };
 
   useEffect(() => {

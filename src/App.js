@@ -19,7 +19,7 @@ import NotFound from "./features/NotFound/pages/NotFound";
 import NavBar from "./shared/components/NavBar";
 import Footer from "./shared/components/footer";
 
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route  } from "react-router-dom";
 
 const App = () => {
   return (
@@ -29,36 +29,24 @@ const App = () => {
         style={{ marginTop: "100px" }}
       >
         <NavBar />
-        <Switch>
-          <Route path="/" component={Home} exact />
-          <Route path="/aboutUs" component={AboutUs} exact />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/aboutUs" element={<AboutUs />} />
 
-          <Route path="/petSitters" component={PetSittersList} exact />
-          <Route path="/petSitters/new" component={PetSitterNew} exact />
-          <Route path="/petSitters/:id" component={PetSitterShow} exact />
-          <Route
-            path="/petSitters/:id/edit"
-            component={PetSitterEdit}
-            exact
-          />
+            <Route path="/petSitters" element={<PetSittersList />} />
+            <Route path="/petSitters/new" element={<PetSitterNew />} />
+            <Route path="/petSitters/:id" element={<PetSitterShow />} />
+            <Route path="/petSitters/:id/edit" element={<PetSitterEdit />} />
 
-          <Route path="/serviceRequests" component={ServiceRequests} exact />
-          <Route
-            path="/serviceRequests/new"
-            component={ServiceRequestsNew}
-            exact
-          />
-          <Route
-            path="/serviceRequests/:id/edit"
-            component={ServiceRequestsEdit}
-            exact
-          />
+            <Route path="/serviceRequests" element={<ServiceRequests />} />
+            <Route path="/serviceRequests/new" element={<ServiceRequestsNew />} />
+            <Route path="/serviceRequests/:id/edit" element={<ServiceRequestsEdit />} />
 
-          <Route path="/register" component={Register} exact />
-          <Route path="/login" component={Login} exact />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
 
-          <Route path="*" component={NotFound} />
-        </Switch>
+            <Route path="*" element={<NotFound />} />
+          </Routes>
         <div className="mt-auto">
           <Footer />
         </div>

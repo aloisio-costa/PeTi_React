@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Redirect } from "react-router";
+import { Navigate } from "react-router-dom";
 import "../../assets/css/user.css";
 
 const Login = ({ setUserName }) => {
@@ -30,7 +30,7 @@ const Login = ({ setUserName }) => {
   };
 
   if (redirect) {
-    return <Redirect to="/" />;
+    return <Navigate to="/" />;
   }
 
   const handleChange = (event) => {

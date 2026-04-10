@@ -1,6 +1,6 @@
 import { React, useState } from "react";
 import { Badge } from "react-bootstrap";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router-dom";
 import {
   createServiceRequest,
   saveServiceRequestPhoto,
@@ -22,7 +22,7 @@ const schema = yup.object().shape({
 });
 
 const ServiceRequestsNew = ({ currentUserId }) => {
-  const history = useHistory();
+  const navigate  = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [serviceRequest, setServiceRequest] = useState({
@@ -84,7 +84,7 @@ const ServiceRequestsNew = ({ currentUserId }) => {
   const onSubmitForm = async () => {
     setLoading(true);
     await newServiceRequest();
-    history.push("/serviceRequests");
+    navigate("/serviceRequests");
   };
 
   return (
