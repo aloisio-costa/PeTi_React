@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchAllPetSitters } from "../api/petSittersApi";
 import DisplayData from "../data/petSitters.json";
-import { isDisplayMode } from "../../../shared/config/env"
+import { isDisplayMode } from "../../../shared/config/env";
 
 export function usePetSitters() {
   const [petSitters, setPetSitters] = useState([]);

@@ -1,7 +1,8 @@
 import { handleRequests } from "../../../shared/api/apiClient";
+import { API_BASE_URL } from "../../../shared/config/env";
 
 export function createReview(reviewBody) {
-  const apiUrl = `${process.env.REACT_APP_PETI_CORE_API_URL}/reviews`;
+  const apiUrl = `${API_BASE_URL}/reviews`;
   const requestOptions = {
     method: "POST",
     headers: { "Content-Type": "application/json" },

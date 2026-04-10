@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Form, Button, Image, Col, Row, Badge } from "react-bootstrap";
+import { Badge } from "react-bootstrap";
 import { useHistory } from "react-router";
 import {
   fetchPetSitter,
@@ -12,6 +12,7 @@ import LoadingSpinner from "../../../shared/utils/loadingSpinner";
 import ErrorAlert from "../../../shared/utils/errorAlert";
 import defaultPetSitterImage from "../../../assets/Images/defaultPetSitter.jpg";
 import DisplayData from "../data/petSitters.json";
+import PetSitterForm from "../components/Form";
 
 const schema = yup.object().shape({
   title: yup.string().required().max(75),

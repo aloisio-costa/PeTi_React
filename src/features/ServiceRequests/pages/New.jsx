@@ -1,5 +1,5 @@
 import { React, useState } from "react";
-import { Form, Button, Image, Col, Row, Badge } from "react-bootstrap";
+import { Badge } from "react-bootstrap";
 import { useHistory } from "react-router";
 import {
   createServiceRequest,
@@ -11,6 +11,7 @@ import { connect } from "react-redux";
 import defaultImage from "../../../assets/Images/defaultServiceRequest.jpg";
 import ErrorAlert from "../../../shared/utils/errorAlert";
 import LoadingSpinner from "../../../shared/utils/loadingSpinner";
+import ServiceRequestForm from "../components/Form";
 
 const schema = yup.object().shape({
   petType: yup.string().required().min(3),
