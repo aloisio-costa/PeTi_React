@@ -11,7 +11,7 @@ import {
 import { connect } from "react-redux";
 import DisplayData from "../../../assets/Display/serviceRequests";
 import defaultServiceRequestImage from "../../../assets/Images/defaultServiceRequest.jpg";
-import { isDisplayMode } from "../../../shared/config/env";
+import { isDisplayMode, PHOTO_API_BASE_URL } from "../../../shared/config/env";
 
 const ServiceRequests = ({ currentUserId }) => {
   const [serviceRequests, setServiceRequests] = useState([]);
@@ -102,9 +102,9 @@ const ServiceRequests = ({ currentUserId }) => {
                           className="rounded"
                           variant="top"
                           src={
-                            process.env.REACT_APP_DISPLAY_MODE
+                            isDisplayMode
                               ? defaultServiceRequestImage
-                              : process.env.REACT_APP_PETI_CORE_PHOTOS_URL +
+                              : PHOTO_API_BASE_URL +
                                 serviceRequest.photoFileName
                           }
                         />

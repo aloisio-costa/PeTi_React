@@ -13,6 +13,7 @@ import ErrorAlert from "../../../shared/utils/errorAlert";
 import defaultPetSitterImage from "../../../assets/Images/defaultPetSitter.jpg";
 import DisplayData from "../data/petSitters.json";
 import PetSitterForm from "../components/Form";
+import { isDisplayMode, PHOTO_API_BASE_URL } from "../../../shared/config/env";
 
 const schema = yup.object().shape({
   title: yup.string().required().max(75),
@@ -62,7 +63,7 @@ const PetSitterEdit = ({ match }) => {
   };
 
   const getPetSitter = async () => {
-    if (process.env.REACT_APP_DISPLAY_MODE) {
+    if (isDisplayMode) {
       setPetSitter(DisplayData[id]);
       setSelectedImage(defaultPetSitterImage);
       setLoading(false);
@@ -76,7 +77,7 @@ const PetSitterEdit = ({ match }) => {
       } else {
         setPetSitter(response.data);
         setSelectedImage(
-          process.env.REACT_APP_PETI_CORE_PHOTOS_URL + response.data.photoFileName
+          PHOTO_API_BASE_URL + response.data.photoFileName
         );
         setError(null);
       }

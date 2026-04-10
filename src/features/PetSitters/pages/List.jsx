@@ -55,9 +55,9 @@ const PetSitters = () => {
                         fluid
                         variant="top"
                         src={
-                          process.env.REACT_APP_DISPLAY_MODE
+                          API_BASE_URL
                             ? defaultPetSitterImage
-                            : process.env.REACT_APP_PETI_CORE_PHOTOS_URL +
+                            : API_BASE_URL +
                               petSitter.photoFileName
                         }
                       />

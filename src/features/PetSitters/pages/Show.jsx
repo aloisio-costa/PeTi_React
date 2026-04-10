@@ -18,13 +18,14 @@ import {
 import LoadingSpinner from "../../../shared/utils/loadingSpinner";
 import { Formik } from "formik";
 import * as yup from "yup";
-import { StarRating, StarRatingResult } from "shared/utils/starRating";
 import "../../../assets/css/stars.css";
 import ErrorAlert from "../../../shared/utils/errorAlert";
 import defaultPetSitterImage from "../../../assets/Images/defaultPetSitter.jpg";
 import DisplayData from "../data/petSitters.json";
 import { useParams } from "react-router-dom";
 import { usePetSitter } from "../hooks/usePetSitter";
+import { isDisplayMode, PHOTO_API_BASE_URL } from "../../../shared/config/env";
+import { StarRating, StarRatingResult } from "../../../shared/utils/starRating";
 
 const schema = yup.object().shape({
   rating: yup.number().required("Don't forget to rate it").min(1).max(5),
@@ -106,9 +107,9 @@ const PetSitterProfile = () => {
           <Card.Img
             variant="top"
             src={
-              process.env.REACT_APP_DISPLAY_MODE
+              isDisplayMode
                 ? defaultPetSitterImage
-                : process.env.REACT_APP_PETI_CORE_PHOTOS_URL +
+                : PHOTO_API_BASE_URL +
                   petSitter.photoFileName
             }
             style={{ height: "495px" }}

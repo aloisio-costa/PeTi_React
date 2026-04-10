@@ -13,6 +13,7 @@ import ErrorAlert from "../../../shared/utils/errorAlert";
 import defaultServiceRequestImage from "../../../assets/Images/defaultServiceRequest.jpg";
 import DisplayData from "../../../assets/Display/serviceRequests";
 import ServiceRequestForm from "../components/Form";
+import { isDisplayMode, PHOTO_API_BASE_URL } from "../../../shared/config/env";
 
 const schema = yup.object().shape({
   petType: yup.string().required().min(3),
@@ -64,7 +65,7 @@ const ServiceRequestsEdit = ({ match }) => {
   };
 
   const getServiceRequest = async () => {
-    if (process.env.REACT_APP_DISPLAY_MODE) {
+    if (isDisplayMode) {
       setServiceRequest(DisplayData.ServiceRequests[id]);
       setSelectedImage(defaultServiceRequestImage);
       
@@ -82,7 +83,7 @@ const ServiceRequestsEdit = ({ match }) => {
       } else {
         setServiceRequest(response.data);
         setSelectedImage(
-          process.env.REACT_APP_PETI_CORE_PHOTOS_URL + response.data.photoFileName
+          PHOTO_API_BASE_URL + response.data.photoFileName
         );
         
         setError(null);

@@ -13,7 +13,7 @@ export function createReview(reviewBody) {
 }
 
 export function deleteReview(id) {
-  const apiUrl = `${process.env.REACT_APP_PETI_CORE_API_URL}/reviews/${id}`;
+  const apiUrl = `${API_BASE_URL}/reviews/${id}`;
   const requestOptions = {
     method: "DELETE",
   };
@@ -22,7 +22,7 @@ export function deleteReview(id) {
 }
 
 export function fetchPetSitterReviews(id) {
-  const apiUrl = `${process.env.REACT_APP_PETI_CORE_API_URL}/reviews/${id}`;
+  const apiUrl = `${API_BASE_URL}/reviews/${id}`;
   const requestOptions = {
     headers: {
       "Content-Type": "application/json",
