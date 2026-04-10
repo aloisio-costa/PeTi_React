@@ -104,8 +104,7 @@ const ServiceRequests = ({ currentUserId }) => {
                           src={
                             isDisplayMode
                               ? defaultServiceRequestImage
-                              : PHOTO_API_BASE_URL +
-                                serviceRequest.photoFileName
+                              : `${PHOTO_API_BASE_URL}${encodeURIComponent(petSitter.photoFileName)}`
                           }
                         />
                       </Col>

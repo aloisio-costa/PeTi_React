@@ -109,8 +109,7 @@ const PetSitterProfile = () => {
             src={
               isDisplayMode
                 ? defaultPetSitterImage
-                : PHOTO_API_BASE_URL +
-                  petSitter.photoFileName
+                : `${PHOTO_API_BASE_URL}${encodeURIComponent(petSitter.photoFileName)}`
             }
             style={{ height: "495px" }}
           />

@@ -1,7 +1,7 @@
 import React from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import { connect } from "react-redux";
-import GoogleAuth from "../../features/Auth/services/googleAuth";
+import GoogleAuth from "../../features/Auth/services/googleAuth.jsx";
 import { useNavigate } from "react-router-dom";
 import { FaPaw } from "react-icons/fa";
 
