@@ -62,7 +62,7 @@ const PetSitterEdit = ({ match }) => {
 
   const getPetSitter = async () => {
     if (process.env.REACT_APP_DISPLAY_MODE) {
-      setPetSitter(DisplayData.PetSitters[id]);
+      setPetSitter(DisplayData[id]);
       setSelectedImage(defaultPetSitterImage);
       setLoading(false);
       setError(null);

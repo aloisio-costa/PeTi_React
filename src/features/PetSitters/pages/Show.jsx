@@ -10,7 +10,6 @@ import {
 } from "react-bootstrap";
 import { IoPersonCircleOutline } from "react-icons/io5";
 import { useHistory } from "react-router";
-import { fetchPetSitter } from "../api/petSittersApi";
 import {
   fetchPetSitterReviews,
   createReview,
@@ -24,6 +23,8 @@ import "../../../assets/css/stars.css";
 import ErrorAlert from "../../../shared/utils/errorAlert";
 import defaultPetSitterImage from "../../../assets/Images/defaultPetSitter.jpg";
 import DisplayData from "../data/petSitters.json";
+import { useParams } from "react-router-dom";
+import { usePetSitter } from "../hooks/usePetSitter";
 
 const schema = yup.object().shape({
   rating: yup.number().required("Don't forget to rate it").min(1).max(5),
@@ -31,21 +32,19 @@ const schema = yup.object().shape({
   body: yup.string().required().max(2000),
 });
 
-const PetSitterProfile = ({ match }) => {
+const PetSitterProfile = () => {
   const history = useHistory();
-  const [petSitter, setPetSitter] = useState();
+  const { id } = useParams();
+  const { petSitter, loading, error } = usePetSitter(id);
   const [review, setReview] = useState({
     rating: "",
     title: "",
     body: "",
     petSitterId: "",
   });
+  const [reviewsError, setReviewsError] = useState(null);
 
   const [reviews, setReviews] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [displayAdmin, setDisplayAdmin] = useState(null);
-  const id = match.params.id;
 
   const CreateReview = async () => {
     await createReview({ ...review, petSitterId: petSitter.id });
@@ -53,26 +52,28 @@ const PetSitterProfile = ({ match }) => {
   };
 
   const fetchReviews = async () => {
-    if (DisplayData.PetSitters[id]) {
-      setReviews(DisplayData.PetSitters[id].reviews);
-      setLoading(false);
-      setError(null);
-      setDisplayAdmin(false);
-    } else {
-      const response = await fetchPetSitterReviews(id).catch((e) => {
-        setError(e.error);
-        setLoading(false);
-      });
+    if (DisplayData[id]) {
+      setReviews(DisplayData[id].reviews);
+      setReviewsError(null);
 
-      if (response) {
-        if (response.data && !response.error) {
-          setReviews(response.data);
-          setLoading(false);
-          setError(null);
-        }
+    } else {
+      const response = await fetchPetSitterReviews(id);
+      
+      if (response.error) {
+        setReviewsError(response.error);
+      } 
+      else {
+        setReviews(response.data);
+        setReviewsError(null);
       }
     }
+    console.log("reviews", reviews);
+
   };
+
+  useEffect(() => {
+    fetchReviews();
+  }, []);
 
   const onFieldChange = (event) => {
     const target = event.target;
@@ -97,33 +98,6 @@ const PetSitterProfile = ({ match }) => {
     await deleteReview(id);
     fetchReviews();
   };
-
-  const fetchPettSitter = async () => {
-    setLoading(true);
-    if (DisplayData.PetSitters[id]) {
-      
-      setPetSitter(DisplayData.PetSitters[id]);
-      setLoading(false);
-      setError(null);
-    } else {
-      const response = await fetchPetSitter(id)
-
-      if (response.error) {
-        setError(response.error);
-        setPetSitter([]);
-      } else {
-        setPetSitter(response.data);
-        setError(null);
-      }
-
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchPettSitter();
-    fetchReviews();
-  }, []);
 
   const RenderPetSitterProfile = () => {
     return (
@@ -180,7 +154,7 @@ const PetSitterProfile = ({ match }) => {
             setFieldValue,
             values,
             touched,
-            errors,
+            errors: reviewsError,
           }) => (
             <Form noValidate onSubmit={handleSubmit}>
               <div>
@@ -194,9 +168,9 @@ const PetSitterProfile = ({ match }) => {
                     onFieldChange(e);
                   }}
                 />
-                {touched.rating && errors.rating && (
+                {touched.rating && reviewsError.rating && (
                   <div id="feedback">
-                    <span style={{ color: "red" }}>{errors.rating}</span>
+                    <span style={{ color: "red" }}>{reviewsError.rating}</span>
                   </div>
                 )}
               </Row>
@@ -212,8 +186,8 @@ const PetSitterProfile = ({ match }) => {
                       handleChange(e);
                       onFieldChange(e);
                     }}
-                    isValid={touched.title && !errors.title}
-                    isInvalid={touched.title && !!errors.title}
+                    isValid={touched.title && !reviewsError.title}
+                    isInvalid={touched.title && !!reviewsError.title}
                   />
                 </Form.Group>
               </Row>
@@ -231,8 +205,8 @@ const PetSitterProfile = ({ match }) => {
                       handleChange(e);
                       onFieldChange(e);
                     }}
-                    isValid={touched.body && !errors.body}
-                    isInvalid={touched.body && !!errors.body}
+                    isValid={touched.body && !reviewsError.body}
+                    isInvalid={touched.body && !!reviewsError.body}
                   />
                 </Form.Group>
               </Row>

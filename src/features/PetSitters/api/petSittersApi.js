@@ -1,4 +1,4 @@
-import { API_BASE_URL } from "../../../shared/api/apiConfig";
+import { API_BASE_URL } from "../../../shared/config/env";
 import { handleRequests } from "../../../shared/api/apiClient";
 
 const jsonHeaders = {

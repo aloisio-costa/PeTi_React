@@ -67,7 +67,7 @@ const PetSitterNew = ({ currentUserId }) => {
     const photoResponse = await savePetSitterPhoto(file);
 
     if(createResponse.error || photoResponse.error){
-      setError(response.error ??  photoResponse.error);
+      setError(createResponse.error ??  photoResponse.error);
     } else {
       setError(null);
     }
