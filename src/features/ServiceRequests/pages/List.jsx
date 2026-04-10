@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "../../../assets/css/dropdownDots.css";
 import LoadingSpinner from "../../../shared/utils/loadingSpinner";
 import "../../../assets/css/indexCard.css";

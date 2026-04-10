@@ -1,4 +1,4 @@
-import { SIGN_IN, SIGN_OUT } from "features/Auth/store/types";
+import { SIGN_IN, SIGN_OUT } from "./types";
 
 const INITIAL_STATE = {
   isSignedIn: null,

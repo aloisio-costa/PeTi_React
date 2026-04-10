@@ -12,7 +12,7 @@ const Navigation = ({ isSignedIn }) => {
     <div>
       <Navbar bg="info" variant="light" expand="lg" fixed="top">
         <div className="container">
-          <Navbar.Brand className="ms-3" onClick={() => navigate .push("/")}>
+          <Navbar.Brand className="ms-3" onClick={() => navigate("/")}>
             <h2>
               P<FaPaw size={20} />
               Ti
@@ -22,21 +22,21 @@ const Navigation = ({ isSignedIn }) => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="w-100 d-flex justify-content-between">
               <div className="d-flex justify-content-start">
-                <Nav.Link onClick={() => navigate .push("/aboutUs")}>
+                <Nav.Link onClick={() => navigate("/aboutUs")}>
                   ABOUT US
                 </Nav.Link>
-                <Nav.Link onClick={() => navigate .push("/petSitters")}>
+                <Nav.Link onClick={() => navigate("/petSitters")}>
                   FIND PET SITTERS
                 </Nav.Link>
                 {isSignedIn && (
-                  <Nav.Link onClick={() => navigate .push("/serviceRequests")}>
+                  <Nav.Link onClick={() => navigate("/serviceRequests")}>
                     MY REQUESTS
                   </Nav.Link>
                 )}
               </div>
               <div className="d-flex justify-content-end">
                 {isSignedIn && (
-                  <Nav.Link onClick={() => navigate .push("/petSitters/new")}>
+                  <Nav.Link onClick={() => navigate("/petSitters/new")}>
                     MY PET SITTING
                   </Nav.Link>
                 )}

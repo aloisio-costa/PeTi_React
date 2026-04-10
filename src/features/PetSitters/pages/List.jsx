@@ -8,6 +8,7 @@ import "../../../assets/css/stars.css";
 import "../../../assets/css/indexCard.css";
 import defaultPetSitterImage from "../../../assets/Images/defaultPetSitter.jpg";
 import { usePetSitters } from "../hooks/usePetSitters";
+import { isDisplayMode, PHOTO_API_BASE_URL } from "../../../shared/config/env"
 
 const PetSitters = () => {
   const navigate = useNavigate();
@@ -52,10 +53,9 @@ const PetSitters = () => {
                         fluid
                         variant="top"
                         src={
-                          API_BASE_URL
+                          isDisplayMode
                             ? defaultPetSitterImage
-                            : API_BASE_URL +
-                              petSitter.photoFileName
+                            : `${PHOTO_API_BASE_URL}${encodeURIComponent(petSitter.photoFileName)}`
                         }
                       />
                     </Col>

@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Badge } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import {
@@ -14,6 +14,7 @@ import defaultServiceRequestImage from "../../../assets/Images/defaultServiceReq
 import DisplayData from "../../../assets/Display/serviceRequests";
 import ServiceRequestForm from "../components/Form";
 import { isDisplayMode, PHOTO_API_BASE_URL } from "../../../shared/config/env";
+import { useParams } from "react-router-dom";
 
 const schema = yup.object().shape({
   petType: yup.string().required().min(3),
@@ -23,7 +24,7 @@ const schema = yup.object().shape({
   note: yup.string(),
 });
 
-const ServiceRequestsEdit = ({ match }) => {
+const ServiceRequestsEdit = () => {
   const navigate = useNavigate();
   const [serviceRequest, setServiceRequest] = useState({
     petType: "",
@@ -36,7 +37,7 @@ const ServiceRequestsEdit = ({ match }) => {
   const [file, setFile] = useState();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const id = match.params.id;
+  const { id } = useParams();
 
   const [selectedImage, setSelectedImage] = useState();
 

@@ -1,3 +1,5 @@
+import React from "react";
+
 const Footer = () => {
   return (
     <footer className="mt-auto bg-info container" style={{ height: "45px" }}>

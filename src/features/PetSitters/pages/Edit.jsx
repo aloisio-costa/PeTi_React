@@ -14,6 +14,7 @@ import defaultPetSitterImage from "../../../assets/Images/defaultPetSitter.jpg";
 import DisplayData from "../data/petSitters.json";
 import PetSitterForm from "../components/Form";
 import { isDisplayMode, PHOTO_API_BASE_URL } from "../../../shared/config/env";
+import { useParams } from "react-router-dom";
 
 const schema = yup.object().shape({
   title: yup.string().required().max(75),
@@ -22,7 +23,7 @@ const schema = yup.object().shape({
   price: yup.number().required().min(1),
 });
 
-const PetSitterEdit = ({ match }) => {
+const PetSitterEdit = () => {
   const [petSitter, setPetSitter] = useState({
     title: "",
     description: "",
@@ -33,8 +34,9 @@ const PetSitterEdit = ({ match }) => {
   const [file, setFile] = useState();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { id } = useParams();
   const navigate = useNavigate();
-  const id = match.params.id;
+
 
   const [selectedImage, setSelectedImage] = useState();
 
