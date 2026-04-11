@@ -45,7 +45,7 @@ const Register = () => {
             placeholder="Name"
             onChange={handleChange}
           />
-          <label for="floatingInput">Name</label>
+          <label className="floatingInput">Name</label>
         </div>
         <div className="form-floating">
           <input
@@ -55,7 +55,7 @@ const Register = () => {
             placeholder="name@example.com"
             onChange={handleChange}
           />
-          <label for="floatingInput">Email address</label>
+          <label className="floatingInput">Email address</label>
         </div>
         <div className="form-floating">
           <input
@@ -65,7 +65,7 @@ const Register = () => {
             placeholder="Password"
             onChange={handleChange}
           />
-          <label for="floatingPassword">Password</label>
+          <label className="floatingPassword">Password</label>
         </div>
         <button className="w-100 btn btn-lg btn-primary" type="submit">
           Sign in

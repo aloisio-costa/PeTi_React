@@ -53,7 +53,7 @@ const Login = ({ setUserName }) => {
             placeholder="name@example.com"
             onChange={handleChange}
           />
-          <label for="floatingInput">Email address</label>
+          <label className="floatingInput">Email address</label>
         </div>
         <div className="form-floating">
           <input
@@ -63,7 +63,7 @@ const Login = ({ setUserName }) => {
             placeholder="Password"
             onChange={handleChange}
           />
-          <label for="floatingPassword">Password</label>
+          <label className="floatingPassword">Password</label>
         </div>
         <button className="w-100 btn btn-lg btn-primary" type="submit">
           Login

@@ -28,21 +28,27 @@ const Navigation = ({ isSignedIn }) => {
                 <Nav.Link onClick={() => navigate("/petSitters")}>
                   FIND PET SITTERS
                 </Nav.Link>
-                {isSignedIn && (
+                {(
                   <Nav.Link onClick={() => navigate("/serviceRequests")}>
                     MY REQUESTS
                   </Nav.Link>
                 )}
               </div>
               <div className="d-flex justify-content-end">
-                {isSignedIn && (
+                {(
                   <Nav.Link onClick={() => navigate("/petSitters/new")}>
                     MY PET SITTING
                   </Nav.Link>
                 )}
-                <div className="mx-3">
-                  <GoogleAuth />
+                <div className="mx-2">
+                  <a href="/Login">Login</a>
                 </div>
+                <div className="mx-2">
+                  <a href="/Register">Register</a>
+                </div>
+                {/* <div className="mx-3">
+                  <GoogleAuth />
+                </div> */}
               </div>
             </Nav>
           </Navbar.Collapse>
