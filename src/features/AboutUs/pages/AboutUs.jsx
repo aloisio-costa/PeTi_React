@@ -21,8 +21,8 @@ const AboutUs = () => {
           <img
             className="w-100"
             style={{ height: "500px" }}
-            src="https://www.townadvisor.com/wp-content/uploads/2017/03/various-pets.jpg"
-            alt="https://www.supermarketnews.com/sites/supermarketnews.com/files/styles/article_featured_retina/public/petvariety_0.png?itok=Ef45NCrW"
+            src="https://currumbinvetservices.com.au/wp-content/uploads/2024/12/exotic-pet-home.jpg"
+            
           />
         </div>
 
