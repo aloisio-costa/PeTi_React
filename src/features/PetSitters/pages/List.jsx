@@ -48,9 +48,8 @@ const PetSitters = () => {
                   <Row>
                     <Col md={5} lg={5}>
                       <Card.Img
-                        style={({ width: "100%" }, { height: "355px" })}
+                        style={{ width: "100%", height: "355px", objectFit: "cover" }}
                         className="rounded"
-                        fluid
                         variant="top"
                         src={
                           isDisplayMode

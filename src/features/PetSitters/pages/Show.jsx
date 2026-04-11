@@ -68,8 +68,6 @@ const PetSitterProfile = () => {
         setReviewsError(null);
       }
     }
-    console.log("reviews", reviews);
-
   };
 
   useEffect(() => {
