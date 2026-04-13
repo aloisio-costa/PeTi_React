@@ -12,6 +12,7 @@ import defaultImage from "../../../assets/Images/defaultServiceRequest.jpg";
 import ErrorAlert from "../../../shared/utils/errorAlert";
 import LoadingSpinner from "../../../shared/utils/loadingSpinner";
 import ServiceRequestForm from "../components/Form";
+import AsyncWrapper from "../../../shared/components/AsyncWrapper";
 
 const schema = yup.object().shape({
   petType: yup.string().required().min(3),
@@ -92,17 +93,7 @@ const ServiceRequestsNew = ({ currentUserId }) => {
       <h1 className="d-flex justify-content-center">
         <Badge bg="success">New Service Request</Badge>
       </h1>
-      {error && !loading && (
-        <div>
-          <ErrorAlert error={error} />
-        </div>
-      )}
-      {!error && loading && (
-        <div>
-          <LoadingSpinner />
-        </div>
-      )}
-      {!error && !loading && (
+      <AsyncWrapper loading={loading} error={error}>
         <Formik
           validationSchema={schema}
           onSubmit={onSubmitForm}
@@ -132,7 +123,7 @@ const ServiceRequestsNew = ({ currentUserId }) => {
             />
           )}
         </Formik>
-      )}
+      </AsyncWrapper>
     </div>
   );
 };

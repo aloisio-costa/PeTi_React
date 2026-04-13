@@ -15,17 +15,16 @@ import {
   createReview,
   deleteReview,
 } from "../api/reviewApi";
-import LoadingSpinner from "../../../shared/utils/loadingSpinner";
 import { Formik } from "formik";
 import * as yup from "yup";
 import "../../../assets/css/stars.css";
-import ErrorAlert from "../../../shared/utils/errorAlert";
 import defaultPetSitterImage from "../../../assets/Images/defaultPetSitter.jpg";
 import DisplayData from "../data/petSitters.json";
 import { useParams } from "react-router-dom";
 import { usePetSitter } from "../hooks/usePetSitter";
 import { isDisplayMode, PHOTO_API_BASE_URL } from "../../../shared/config/env";
 import { StarRating, StarRatingResult } from "../../../shared/utils/starRating";
+import AsyncWrapper from "../../../shared/components/AsyncWrapper";
 
 const schema = yup.object().shape({
   rating: yup.number().required("Don't forget to rate it").min(1).max(5),
@@ -122,14 +121,12 @@ const PetSitterProfile = () => {
             <ListGroupItem>From {petSitter.price}/day</ListGroupItem>
           </ListGroup>
           <Card.Body>
-            {/* {displayAdmin && ( */}
             <Button
               onClick={() => navigate(`/petSitters/${petSitter.id}/edit`)}
               variant="info"
             >
               Edit
             </Button>
-            {/* )} */}
             <Button className="ms-3" variant="success">
               Contact
             </Button>
@@ -250,29 +247,21 @@ const PetSitterProfile = () => {
     });
 
   return (
-    <div className="mt-1">
-      {error && !loading && (
+    <AsyncWrapper loading={loading} error={error}>
+      {petSitter && (
         <div>
-          <ErrorAlert error={error} />
+          <Row className="no-gutters">
+            <Col md={5} className="mr-3">
+              {RenderPetSitterProfile()}
+            </Col>
+            <Col>
+              {RenderPetSitterReviewInput()}
+              <div className="mt-5">{reviewsList}</div>
+            </Col>
+          </Row>
         </div>
       )}
-      {!error && loading && (
-        <div>
-          <LoadingSpinner />
-        </div>
-      )}
-      {!error && !loading && petSitter && reviews && (
-        <Row className="no-gutters">
-          <Col md={5} className="mr-3">
-            {RenderPetSitterProfile()}
-          </Col>
-          <Col>
-            {RenderPetSitterReviewInput()}
-            <div className="mt-5">{reviewsList}</div>
-          </Col>
-        </Row>
-      )}
-    </div>
+    </AsyncWrapper>
   );
 };
 

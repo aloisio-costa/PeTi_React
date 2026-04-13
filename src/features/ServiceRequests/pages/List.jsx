@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../../../assets/css/dropdownDots.css";
-import LoadingSpinner from "../../../shared/utils/loadingSpinner";
 import "../../../assets/css/indexCard.css";
-import ErrorAlert from "../../../shared/utils/errorAlert";
 import { Card, Row, Col, Button, Dropdown } from "react-bootstrap";
 import {
   fetchServiceRequests,
@@ -12,6 +10,7 @@ import { connect } from "react-redux";
 import DisplayData from "../../../assets/Display/serviceRequests";
 import defaultServiceRequestImage from "../../../assets/Images/defaultServiceRequest.jpg";
 import { isDisplayMode, PHOTO_API_BASE_URL } from "../../../shared/config/env";
+import AsyncWrapper from "../../../shared/components/AsyncWrapper";
 
 const ServiceRequests = ({ currentUserId }) => {
   const [serviceRequests, setServiceRequests] = useState([]);
@@ -58,88 +57,80 @@ const ServiceRequests = ({ currentUserId }) => {
           MAKE REQUEST
         </Button>
       </div>
-      {error && !loading && (
-        <div>
-          <ErrorAlert error={error} />
-        </div>
-      )}
-      {!error && loading && (
-        <div>
-          <LoadingSpinner />
-        </div>
-      )}
-      {!error && !loading && serviceRequests && (
-        <div>
-          {serviceRequests.map((serviceRequest) => {
-            return (
-              <div key={serviceRequest.id}>
-                <Card className="cardEffect shadow p-3 mb-4 rounded">
-                  <Card.Header
-                    as="h5"
-                    className="d-flex justify-content-between"
-                  >
-                    {serviceRequest.service}
-                    <Dropdown>
-                      <Dropdown.Toggle variant="Info" />
-                      <Dropdown.Menu size="sm" title="">
-                        <Dropdown.Item
-                          href={`serviceRequests/${serviceRequest.id}/edit`}
-                        >
-                          Edit
-                        </Dropdown.Item>
-                      </Dropdown.Menu>
-                    </Dropdown>
-                  </Card.Header>
-                  <Card.Body>
-                    <Card.Title className="d-flex justify-content-center">
-                      {serviceRequest.petType} - {serviceRequest.breed}
-                    </Card.Title>
+      <AsyncWrapper loading={loading} error={error}>
+        {serviceRequests && (
+          <div>
+            {serviceRequests.map((serviceRequest) => {
+              return (
+                <div key={serviceRequest.id}>
+                  <Card className="cardEffect shadow p-3 mb-4 rounded">
+                    <Card.Header
+                      as="h5"
+                      className="d-flex justify-content-between"
+                    >
+                      {serviceRequest.service}
+                      <Dropdown>
+                        <Dropdown.Toggle variant="Info" />
+                        <Dropdown.Menu size="sm" title="">
+                          <Dropdown.Item
+                            href={`serviceRequests/${serviceRequest.id}/edit`}
+                          >
+                            Edit
+                          </Dropdown.Item>
+                        </Dropdown.Menu>
+                      </Dropdown>
+                    </Card.Header>
+                    <Card.Body>
+                      <Card.Title className="d-flex justify-content-center">
+                        {serviceRequest.petType} - {serviceRequest.breed}
+                      </Card.Title>
 
-                    <Row className="no-gutters">
-                      <Col lg={{ span: 1, offset: 2 }}>
-                        <Card.Img
-                          style={({ width: "10%" }, { height: "5rem" })}
-                          className="rounded"
-                          variant="top"
-                          src={
-                            isDisplayMode
-                              ? defaultServiceRequestImage
-                              : `${PHOTO_API_BASE_URL}${encodeURIComponent(petSitter.photoFileName)}`
-                          }
-                        />
-                      </Col>
-                      <Col md={6}>
-                        <Card.Text className="d-flex justify-content-center">
-                          {serviceRequest.note}
+                      <Row className="no-gutters">
+                        <Col lg={{ span: 1, offset: 2 }}>
+                          <Card.Img
+                            style={({ width: "10%" }, { height: "5rem" })}
+                            className="rounded"
+                            variant="top"
+                            src={
+                              isDisplayMode
+                                ? defaultServiceRequestImage
+                                : `${PHOTO_API_BASE_URL}${encodeURIComponent(petSitter.photoFileName)}`
+                            }
+                          />
+                        </Col>
+                        <Col md={6}>
+                          <Card.Text className="d-flex justify-content-center">
+                            {serviceRequest.note}
+                          </Card.Text>
+                        </Col>
+                      </Row>
+                      <Col md={{ span: 6, offset: 2 }}>
+                        <Card.Text className="mb-2 text-muted">
+                          {serviceRequest.location}
                         </Card.Text>
                       </Col>
-                    </Row>
-                    <Col md={{ span: 6, offset: 2 }}>
-                      <Card.Text className="mb-2 text-muted">
-                        {serviceRequest.location}
-                      </Card.Text>
-                    </Col>
 
-                    <Card.Footer className="mb-2 d-flex justify-content-between">
-                      <Card.Link href="petSitters" className="link-info">
-                        Find Pet Lovers
-                      </Card.Link>
-                      <Button
-                        onClick={() =>
-                          handleDeleteServiceRequest(serviceRequest.id)
-                        }
-                        variant="danger"
-                      >
-                        Delete
-                      </Button>
-                    </Card.Footer>
-                  </Card.Body>
-                </Card>
-              </div>
-            );
-          })}
-        </div>
-      )}
+                      <Card.Footer className="mb-2 d-flex justify-content-between">
+                        <Card.Link href="petSitters" className="link-info">
+                          Find Pet Lovers
+                        </Card.Link>
+                        <Button
+                          onClick={() =>
+                            handleDeleteServiceRequest(serviceRequest.id)
+                          }
+                          variant="danger"
+                        >
+                          Delete
+                        </Button>
+                      </Card.Footer>
+                    </Card.Body>
+                  </Card>
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </AsyncWrapper>
     </div>
   );
 };

@@ -9,9 +9,8 @@ import { connect } from "react-redux";
 import { Formik } from "formik";
 import * as yup from "yup";
 import defaultImage from "../../../assets/Images/defaultPetSitter.jpg";
-import ErrorAlert from "../../../shared/utils/errorAlert";
-import LoadingSpinner from "../../../shared/utils/loadingSpinner";
 import PetSitterForm from "../components/Form";
+import AsyncWrapper from "../../../shared/components/AsyncWrapper";
 
 const schema = yup.object().shape({
   title: yup.string().required().max(75),
@@ -87,17 +86,7 @@ const PetSitterNew = ({ currentUserId }) => {
       <h1 className="d-flex justify-content-center">
         <Badge bg="success">Become a Pet Sitter</Badge>
       </h1>
-      {error && !loading && (
-        <div>
-          <ErrorAlert error={error} />
-        </div>
-      )}
-      {!error && loading && (
-        <div>
-          <LoadingSpinner />
-        </div>
-      )}
-      {!error && !loading && (
+      <AsyncWrapper loading={loading} error={error}>
         <Formik
           validationSchema={schema}
           onSubmit={onSubmitForm}
@@ -129,7 +118,7 @@ const PetSitterNew = ({ currentUserId }) => {
             />
           )}
         </Formik>
-      )}
+      </AsyncWrapper>
     </div>
   );
 };

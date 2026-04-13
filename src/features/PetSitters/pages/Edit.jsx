@@ -8,13 +8,12 @@ import {
 } from "../api/petSittersApi";
 import { Formik } from "formik";
 import * as yup from "yup";
-import LoadingSpinner from "../../../shared/utils/loadingSpinner";
-import ErrorAlert from "../../../shared/utils/errorAlert";
 import defaultPetSitterImage from "../../../assets/Images/defaultPetSitter.jpg";
 import DisplayData from "../data/petSitters.json";
 import PetSitterForm from "../components/Form";
 import { isDisplayMode, PHOTO_API_BASE_URL } from "../../../shared/config/env";
 import { useParams } from "react-router-dom";
+import AsyncWrapper from "../../../shared/components/AsyncWrapper";
 
 const schema = yup.object().shape({
   title: yup.string().required().max(75),
@@ -106,47 +105,39 @@ const PetSitterEdit = () => {
       <h1 className="d-flex justify-content-center">
         <Badge bg="success">Edit Pet Sitter</Badge>
       </h1>
-      {error && !loading && (
-        <div>
-          <ErrorAlert error={error} />
-        </div>
-      )}
-      {!error && loading && (
-        <div>
-          <LoadingSpinner />
-        </div>
-      )}
-      {!error && !loading && petSitter && (
-        <Formik
-          validationSchema={schema}
-          onSubmit={onSubmitForm}
-          initialValues={petSitter}
-        >
-          {({
-            handleSubmit,
-            handleChange,
-            handleBlur,
-            values,
-            touched,
-            isValid,
-            errors,
-          }) => (
-            <PetSitterForm
-              handleSubmit={handleSubmit}
-              handleChange={handleChange}
-              handleBlur={handleBlur}
-              values={values}
-              touched={touched}
-              errors={errors}
-              isValid={isValid}
-              onFieldChange={onFieldChange}
-              imageHandleChange={imageHandleChange}
-              selectedImage={selectedImage}
-              submitDisabled={!isValid}
-            />
-          )}
-        </Formik>
-      )}
+      <AsyncWrapper loading={loading} error={error}>
+        {petSitter && (
+          <Formik
+            validationSchema={schema}
+            onSubmit={onSubmitForm}
+            initialValues={petSitter}
+          >
+            {({
+              handleSubmit,
+              handleChange,
+              handleBlur,
+              values,
+              touched,
+              isValid,
+              errors,
+            }) => (
+              <PetSitterForm
+                handleSubmit={handleSubmit}
+                handleChange={handleChange}
+                handleBlur={handleBlur}
+                values={values}
+                touched={touched}
+                errors={errors}
+                isValid={isValid}
+                onFieldChange={onFieldChange}
+                imageHandleChange={imageHandleChange}
+                selectedImage={selectedImage}
+                submitDisabled={!isValid}
+              />
+            )}
+          </Formik>
+        )}
+      </AsyncWrapper>
     </div>
   );
 };
