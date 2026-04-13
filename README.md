@@ -1,53 +1,142 @@
+# 🐾 PeTi - Pet Services Platform
 
-# What is it? 
-PeTi is a "Uber" of pet services. A simple prototype website which the goal is to connect people who are looking for someone to take care of their pet/s with people who are willing to do so.
+PeTi is a web application that connects pet owners with pet sitters, allowing users to browse, create, and manage pet sitting services.
 
-### Home page
+This project was refactored to demonstrate modern frontend architecture, clean code practices, and improved maintainability for real-world applications.
+
+---
+
+## Screenshots
+- Home page
 ![PeTi_HomePage](https://user-images.githubusercontent.com/86933138/135457755-5c24fd75-9e80-43b8-86cc-d342fb2b6fc3.png)
-
-### Find Pet Sitters Page
-Page where you will find a list of pet Sitters & can click them to see their profile.
+- Pet Sitters list
 ![PeTi_PetSitters](https://user-images.githubusercontent.com/86933138/135457927-25a252dd-3cfc-4c45-9e9d-af76c67208f8.png)
-
-
-### Profile page
-Page where you can see the pet sitter profile, see his/her reviews and leave a review yourself.
+- Pet Sitter details
 ![PeTi_PetSitterProfile](https://user-images.githubusercontent.com/86933138/135457906-c6aaac46-77cc-443a-80be-65bda24d82de.png)
-
-### My Requests
-Page where you can see your requests, edit 
-![PeTi_ServiceRequests](https://user-images.githubusercontent.com/86933138/135457963-56fa1117-6f27-4371-9466-2aa30cb2de23.png)
-
-and make new ones.
+- Create/Edit forms
 ![PeTi_NewServiceRequest](https://user-images.githubusercontent.com/86933138/135460363-2190ad3d-25a0-4d91-be10-92c9e4bdde83.png)
+---
 
-**Note that to see "My Pet Sitting" and "My Requests" page you need to be logged in.**
+## About the Project
 
-The website runs without the API. In .ENV file, you can change `"DISPLAY_MODE"` to "true" to be able to see 
-some examples of Services Requests and Pet Sitter profiles. 
+This project was originally built as a learning project and later **refactored to follow modern frontend practices**.
 
-# What did I use?
-The project client side was written in React and the API in .NET/C#.
+The goal of the refactor was to:
+- Improve code structure and maintainability
+- Reduce duplication
+- Modernize the stack
+- Prepare the project for portfolio/interview use
 
-**React**
-- React Hooks and functional components
-- Redux 
-- Bootstrap for the majority of the styling
-- Google OAuth service for authentication
+---
 
-**.Net API**
-- Entity Framework Core
-- Swagger
-- SQL server
-- Postman for testing
+## Tech Stack
 
-#
-The project is still in development, I make changes frequently as I can and as I evolve as a developer and 
-learn new things I can implement in it.
+**Frontend**
+- React
+- Vite (migrated from Create React App)
+- React Router v6
 
-### Note:
-- I am aware there is some reapeated code
-- I do not have unitary tests yet
-- There might be some commented code or console logs
-- The API needs a lot of work yet, I did it as simple as possible to have something work with my client side
-This Project API can be found here https://github.com/aloisio-costa/PeTi-API
+**UI**
+- React Bootstrap
+
+**Forms & Validation**
+- Formik
+- Yup
+
+**Language**
+- JavaScript (ES6+)
+
+---
+
+## Project Structure
+
+```
+src/
+    features/
+        PetSitters/
+            pages/
+            hooks/
+            api/
+            data/
+        ServiceRequests/
+            pages/
+            api/
+        Users/
+    shared/
+        components/
+        utils/
+        api/
+        config/
+```
+
+---
+
+## Key Improvements (Refactor)
+
+- Migrated project from **Create React App → Vite**
+- Updated routing to **React Router v6**
+- Introduced **feature-based architecture**
+- Extracted reusable logic into **custom hooks**
+- Created **shared form components**
+- Centralized API calls
+- Removed unused code and legacy patterns
+
+These changes improved code organization, reduced duplication, and made the application easier to scale and maintain.
+
+---
+
+## Running the Project
+
+### 1. Install dependencies
+```bash
+npm install
+```
+
+### 2. Create .env file
+
+```env
+VITE_DISPLAY_MODE=true
+VITE_PETI_CORE_API_URL=http://localhost:5000
+```
+
+### 3. Run the project
+
+```bash
+npm run dev
+```
+
+App runs on:
+
+http://localhost:5173
+
+## Mock Mode
+
+To simplify development and testing, the app supports a mock mode:
+
+```env
+VITE_DISPLAY_MODE=true
+```
+
+Uses local JSON data
+No backend required
+
+## Backend (optional)
+
+Backend API available here: https://github.com/aloisio-costa/PeTi-API
+
+## Notes
+ - Authentication is currently simplified / disabled for demo purposes
+ - Google Auth was removed during refactor to reduce complexity
+
+## Future Improvements
+
+ - Reintroduce authentication (JWT / OAuth)
+ - Add unit and integration tests
+ - Improve UI/UX design
+ - Connect fully with backend API
+
+## Author
+
+Aloisio Costa
+
+Fullstack Developer (React / .NET)
