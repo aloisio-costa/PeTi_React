@@ -1,0 +1,52 @@
+{
+  "name": "peti",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@hookform/resolvers": "^2.6.0",
+    "@testing-library/jest-dom": "^5.12.0",
+    "@testing-library/react": "^11.2.7",
+    "@testing-library/user-event": "^12.8.3",
+    "@vitejs/plugin-react": "^4.7.0",
+    "bootstrap": "^5.0.1",
+    "formik": "^2.2.9",
+    "react": "^18.3.1",
+    "react-bootstrap": "^1.6.0",
+    "react-dom": "^18.3.1",
+    "react-hook-form": "^7.9.0",
+    "react-icons": "^4.2.0",
+    "react-redux": "^7.2.5",
+    "react-router-dom": "^6.30.3",
+    "redux": "^4.1.1",
+    "universal-cookie": "^8.1.0",
+    "vite": "^4.5.14",
+    "web-vitals": "^1.1.2",
+    "yup": "^0.32.9"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/react-router-dom": "^5.3.3"
+  }
+}

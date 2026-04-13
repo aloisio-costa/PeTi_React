@@ -1,0 +1,78 @@
+[
+    {
+      "title": "Best Pet Sitter in the world",
+      "description": "Hello parents!\nIf u need someone to take care of your pets, even if it’s a last minute thing, I am the right person to help.\nI’ve always loved animals, since I was little so this is basically my dream job .\nI have experience with animals, I have myself a cat that loves new friends.\nI can provide dog/cat boarding, they can stay for a few days, I can walk them as much as they want and will provide all the love and care they need.\nIf u need help, give me a call!",
+      "location": "Bobadela, Lisboa",
+      "price": 15,
+      "reviews": [
+        {
+          "title": "Very Impressed",
+          "body": "Cláudia pet-sat our antisocial cat for 6 days and we were very happy with the experience. At first I thought Cláudia would have no luck trying to interact with our cat, but I was really surprised when she conquered it over only a few days! And she also sent us videos and photos of our cat regularly, which really helped put our minds at ease.",
+          "rating": 5
+        },
+        {
+          "title": "Will book again",
+          "body": "Couldn’t ask for someone better to look after my cat. She does a better job then I do. Really recommend Cláudia !! She will be taking care of my cat on all future occasions no doubts",
+          "rating": 4
+        },
+        {
+          "title": "Great person but needs to improve place",
+          "body": "Claudia is a great human being, unfurtanally my cat did not adapt to her place and found it very uncufortable.",
+          "rating": 4
+        }
+      ],
+      "photoFileName": "defaultPetSitter.png",
+      "id": "0"
+    },
+    {
+      "title": "Lisbon Dog Walker",
+      "description": "Flexible and trustworthy pet sitter who love animals. My entire life I’ve been surrounded by dogs and cats. I had to leave my country and now I would like a fluffy friend to provide care and love!I used to have 3 dogs back in my home country , Mia, Bailey and Sombra. All of them were rescued from the streets.",
+      "location": "Lisbon",
+      "price": 13,
+      "reviews": [
+        {
+          "title": "The best one",
+          "body": "Valen is the best She took amazing care off Beth over the weekend and I could just tell how happy and relieved Beth was",
+          "rating": 4
+        },
+        {
+          "title": "It was good",
+          "body": "All was good, thank you for your help. I'd just recommend you to clean eating place and toilet little bit more careful. Thanks.",
+          "rating": 3
+        },
+        {
+          "title": "I recomend Valentina",
+          "body": "Valentina took amazingly good care of our scruffy. It looks like he found a second home with Valentina and her boy friend. Our dog is usually gets home sick, but this is the first time around he did not miss us that much.",
+          "rating": 3
+        },
+        {
+          "title": "Highly recomend her!",
+          "body": "She is the best Pet sitter ever, I left my dog Batu with her for 5 nights and everything was great, she was doing her job and taking care of my Batu in an excellent way, she was sending me photos and videos on a daily basis, and as a personality she is intelligent, polite... As a conclusion, I highly recommend her if you would like to keep your dog with a safe hands",
+          "rating": 5
+        }
+      ],
+      "photoFileName": "defaultPetSitter.png",
+      "id": "1"
+    },
+    {
+      "title": "Cat Sitting",
+      "description": "Hi! I’m Irene, 22 years old. I’m a psichology student and I’m used ti animals since I was born . I can take care of out dog or cat during your holidays!\nDogs shouldn’t be fugitive or aggressive and I always ask a kitten onwer to cut off the nails before the stay do as not to cause harm if they act aggressively.\nI have always loved cats and I feel very attached to them.\nI have cats and a small dog. I love dogs but since I have cats I fell in love with these wonderful beings!",
+      "location": "Scunthorpe, UK",
+      "price": 19,
+      "reviews": [
+        {
+          "title": "Irene the best is the best caregiver",
+          "body": "Irene has taken good care of my two cats. She is very kind and provided updates everyday on them. Thanks very much!",
+          "rating": 5
+        },
+        {
+          "title": "Excellent sitter",
+          "body": "Irene was great.  Very accommodating and kept us constantly updated with photos and videos. Only with her 1 night this time but we have already booked again for our next trip away! Would highly recommend.",
+          "rating": 5
+        }
+      ],
+
+      "photoFileName": "defaultPetSitter.png",
+      "id": "2"
+    }
+  ]

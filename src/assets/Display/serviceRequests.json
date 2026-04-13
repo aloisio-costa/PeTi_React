@@ -1,0 +1,28 @@
+{
+  "ServiceRequests": [
+    {
+      "petType": "Dog",
+      "breed": "Alaskan Malamute",
+      "service": "Pet Day Care",
+      "location": "Povoa Santa Iria",
+      "note": "I need someone who can watch over my \"Avalanche\" this weekend. He is very calm and sweet. There is not much to worry tho, all he does is sleep all the time anyways. Feel free to contact me with any question you have. Thanks :)",
+      "id": "0"
+    },
+    {
+      "petType": "Dog",
+      "breed": "French Bulldog",
+      "service": "Dog Walk",
+      "location": "Vila Nova de Gaia, Porto",
+      "note": "My litle cute french bulldog has been acting weird. I am afraid to leave him home alone. He can be a bit moody and hard to deal with. He does get along with other dogs he has never seen. I need someone who stay with him for at least 4 hours monday to friday. Thank you.",
+      "id": "1"
+    },
+    {
+      "petType": "Cat",
+      "breed": "Scotish Fold",
+      "service": "Pet Day Care",
+      "location": "Almada, Setubal",
+      "note": "My baby is a very social cat, e loves to sleep on humans lap and if you ask him gently he can massage you with his paws. Need someone who can watch him tomorrow as I will be out for the day.",
+      "id": "2"
+    }
+  ]
+}

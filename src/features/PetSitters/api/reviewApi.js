@@ -1,0 +1,34 @@
+import { handleRequests } from "../../../shared/api/apiClient";
+import { API_BASE_URL } from "../../../shared/config/env";
+
+export function createReview(reviewBody) {
+  const apiUrl = `${API_BASE_URL}/reviews`;
+  const requestOptions = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(reviewBody),
+  };
+
+  return handleRequests(apiUrl, requestOptions);
+}
+
+export function deleteReview(id) {
+  const apiUrl = `${API_BASE_URL}/reviews/${id}`;
+  const requestOptions = {
+    method: "DELETE",
+  };
+
+  return handleRequests(apiUrl, requestOptions);
+}
+
+export function fetchPetSitterReviews(id) {
+  const apiUrl = `${API_BASE_URL}/reviews/${id}`;
+  const requestOptions = {
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+  };
+
+  return handleRequests(apiUrl, requestOptions);
+}

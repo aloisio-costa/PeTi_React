@@ -1,0 +1,22 @@
+[1mdiff --git a/src/App.js b/src/App.js[m
+[1mindex 7bda78c..eacfa4f 100644[m
+[1m--- a/src/App.js[m
+[1m+++ b/src/App.js[m
+[36m@@ -11,13 +11,13 @@[m [mimport ServiceRequestsNew from "./features/ServiceRequests/new";[m
+ import ServiceRequestsEdit from "./features/ServiceRequests/edit";[m
+ [m
+ import AboutUs from "./components/aboutUs";[m
+[31m-import Register from "./components/Users/register";[m
+[31m-import Login from "./components/Users/login";[m
+[32m+[m[32mimport Register from "./features/Users/register";[m
+[32m+[m[32mimport Login from "./features/Users/login";[m
+ [m
+ import NotFound from "components/notFound";[m
+ [m
+[31m-import NavBar from "./components/Partials/NavBar";[m
+[31m-import Footer from "./components/Partials/footer";[m
+[32m+[m[32mimport NavBar from "./shared/components/NavBar";[m
+[32m+[m[32mimport Footer from "./shared/components/footer";[m
+ [m
+ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";[m
+ [m

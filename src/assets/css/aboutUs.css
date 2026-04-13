@@ -1,0 +1,8 @@
+.page {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 6);
+  transition: 0.4s;
+  width: auto;
+  background: #fff;
+  text-align: center;
+  font-size: 1rem;
+}
