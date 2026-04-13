@@ -1,14 +1,13 @@
 import React from "react";
 import { Card, Row, Col, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import LoadingSpinner from "../../../shared/utils/loadingSpinner";
-import ErrorAlert from "../../../shared/utils/errorAlert";
 import { StarRatingResult } from "../../../shared/utils/starRating";
 import "../../../assets/css/stars.css";
 import "../../../assets/css/indexCard.css";
 import defaultPetSitterImage from "../../../assets/Images/defaultPetSitter.jpg";
 import { usePetSitters } from "../hooks/usePetSitters";
 import { isDisplayMode, PHOTO_API_BASE_URL } from "../../../shared/config/env"
+import AsyncWrapper from "../../../shared/components/AsyncWrapper";
 
 const PetSitters = () => {
   const navigate = useNavigate();
@@ -24,18 +23,8 @@ const PetSitters = () => {
   };
 
   return (
-    <div>
-      {error && !loading && (
-        <div>
-          <ErrorAlert error={error} />
-        </div>
-      )}
-      {!error && loading && (
-        <div>
-          <LoadingSpinner />
-        </div>
-      )}
-      {!error && !loading && petSitters && (
+    <AsyncWrapper loading={loading} error={error}>
+      {petSitters && (
         <div>
           <Col md={9} lg={9}>
             {petSitters.map((petSitter) => {
@@ -102,7 +91,7 @@ const PetSitters = () => {
           </Col>
         </div>
       )}
-    </div>
+    </AsyncWrapper>
   );
 };
 
