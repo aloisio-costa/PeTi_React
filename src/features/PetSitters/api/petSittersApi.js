@@ -1,25 +1,19 @@
-import { API_BASE_URL } from "../../../shared/config/env";
-import { handleRequests } from "../../../shared/api/apiClient";
+import { apiClient } from "../../../shared/api/apiClient";
 
 const jsonHeaders = {
   "Content-Type": "application/json",
-  Accept: "application/json",
 };
 
 export function fetchAllPetSitters() {
-  return handleRequests(`${API_BASE_URL}/petSitters`, {
-    headers: jsonHeaders,
-  });
+  return apiClient("/petSitters");
 }
 
 export function fetchPetSitter(id) {
-  return handleRequests(`${API_BASE_URL}/petSitters/${id}`, {
-    headers: jsonHeaders,
-  });
+  return apiClient(`/petSitters/${id}`);
 }
 
 export function createPetSitter(petSitter) {
-  return handleRequests(`${API_BASE_URL}/petSitters`, {
+  return apiClient("/petSitters", {
     method: "POST",
     headers: jsonHeaders,
     body: JSON.stringify(petSitter),
@@ -27,7 +21,7 @@ export function createPetSitter(petSitter) {
 }
 
 export function updatePetSitter(petSitter, id) {
-  return handleRequests(`${API_BASE_URL}/petSitters/${id}`, {
+  return apiClient(`/petSitters/${id}`, {
     method: "PUT",
     headers: jsonHeaders,
     body: JSON.stringify(petSitter),
@@ -35,7 +29,7 @@ export function updatePetSitter(petSitter, id) {
 }
 
 export function savePetSitterPhoto(formData) {
-  return handleRequests(`${API_BASE_URL}/petSitters/SaveFile`, {
+  return apiClient("/petSitters/SaveFile", {
     method: "POST",
     body: formData,
   });

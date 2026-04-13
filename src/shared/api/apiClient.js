@@ -1,11 +1,19 @@
-export async function handleRequests(apiUrl, requestOptions = {}) {
+import { API_BASE_URL } from "../config/env";
+
+export async function apiClient(endpoint, options = {}) {
   try {
-    const response = await fetch(apiUrl, requestOptions);
+    const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+      headers: {
+        Accept: "application/json",
+        ...options.headers,
+      },
+      ...options,
+    });
 
     if (!response.ok) {
       return {
-        data: [],
-        error: `Could not fetch data, error ${response.status}`,
+        data: null,
+        error: `Request failed with status ${response.status}`,
       };
     }
 
@@ -13,20 +21,14 @@ export async function handleRequests(apiUrl, requestOptions = {}) {
 
     if (contentType && contentType.includes("application/json")) {
       const data = await response.json();
-      return {
-        data,
-        error: "",
-      };
+      return { data, error: null };
     }
 
-    return {
-      data: null,
-      error: "",
-    };
+    return { data: null, error: null };
   } catch (error) {
     return {
-      data: [],
-      error: error.message || "Unexpected error while fetching data.",
+      data: null,
+      error: error.message || "Unexpected network error",
     };
   }
 }
